@@ -6,8 +6,26 @@ class Solution:
         for char in s:
             counts[char] += 1
         for char in t:
-            counts[char] -= 1
-            if counts[char] < 0:
+            if counts[char] == 0:
                 return False
+            counts[char] -= 1
         return True
         
+#                 dic = {}
+#         for i in s:
+#             if i not in dic:
+#                 dic[i] = 1
+#             else:
+#                 dic[i] += 1
+        
+#         for j in t:
+#             if j not in dic:
+#                 return False
+#             else:
+#                 dic[j] -= 1
+        
+#         for val in dic.values():
+#             if val != 0:
+#                 return False
+        
+#         return True
