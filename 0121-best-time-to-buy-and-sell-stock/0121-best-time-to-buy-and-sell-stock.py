@@ -5,7 +5,7 @@ class Solution:
         
         for i in range(len(prices)-2, -1, -1):
             curr = prices[i]
-            max_profit = max(max_profit, sell - curr)
-            sell = max(sell, curr)
+            max_profit = sell - curr if sell - curr > max_profit else max_profit
+            sell = curr if curr > sell else sell
         
         return max_profit
