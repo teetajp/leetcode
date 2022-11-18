@@ -3,7 +3,7 @@ class Solution:
         # we want to find any index where the jump[i] >= (n-1)
         # to get to that index, we need to find an index j where jump[j] >= i
         # and so on...
-        # could go through the array to find an index where jump[i] >= n-1
+        # So, we will iterate through the array up to the maximum jumpable index, and update the max reachable index where possible
         if len(nums) == 0: return True
         max_index = nums[0]
         curr_i = 1
