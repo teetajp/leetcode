@@ -7,7 +7,7 @@ class Solution:
         if len(nums) == 0: return True
         max_index = nums[0]
         curr_i = 1
-        while curr_i <= max_index and curr_i < len(nums)-1 and max_index < len(nums)-1:
+        while curr_i <= max_index and max_index < len(nums)-1:
             max_index = max(max_index, curr_i + nums[curr_i])
             curr_i += 1
         return max_index >= len(nums) - 1
