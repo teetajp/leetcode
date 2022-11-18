@@ -4,7 +4,6 @@ class Solution:
         # to get to that index, we need to find an index j where jump[j] >= i
         # and so on...
         # could go through the array to find an index where jump[i] >= n-1
-        # as we are going through, we keep an another array of booleans representing whethere a jump is reachable, then update it
         if len(nums) == 0: return True
         max_index = nums[0]
         curr_i = 1
