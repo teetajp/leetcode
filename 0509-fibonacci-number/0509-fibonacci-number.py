@@ -1,5 +1,4 @@
-class Solution:
-    
+class Solution: 
     def fib(self, n: int) -> int:
         fib_memo = [0, 1]
         for i in range(2, n):
