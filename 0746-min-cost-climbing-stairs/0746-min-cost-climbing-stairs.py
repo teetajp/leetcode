@@ -3,8 +3,7 @@ class Solution:
         # minCost[i] = cost[i] + min(minCost[i+1], minCost[i+2])        if i < len(cost)
         # 0                                                             if i >= len(cost)
         n = len(cost)
-        minCost = [-1 for i in range(n + 2)] # 2 placeholder value to represent when i >= len(cost) - 1
-        minCost[n], minCost[n+1] = 0, 0
+        minCost = [0 for i in range(n + 2)] # 2 placeholder value to represent when i >= len(cost) - 1
         
         for i in range(n-1, -1, -1):
             minCost[i] = cost[i] + min(minCost[i+1], minCost[i+2])
