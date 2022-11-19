@@ -21,7 +21,7 @@ class Solution:
 #         # O(n) time to fill the DP array, O(2n) space for DP memoization array
     
         maxLoot = [0, 0] # first index stores the max loot from the i-2th iteration, and second index stores current iteration's max loot
-        for loot in nums:
-            maxLoot[0], maxLoot[1] = maxLoot[1], max(maxLoot[1], loot + maxLoot[0])
+        for i in range(len(nums)):
+            maxLoot[0], maxLoot[1] = maxLoot[1], max(maxLoot[1], nums[i] + maxLoot[0])
         return maxLoot[1]
             
