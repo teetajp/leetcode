@@ -24,14 +24,23 @@ class Solution:
         # We want to compute maxLoot(0, 0)
         # We have to fill the array from with i <- n down to 0 to satisfy the dependencies
         # Also compute j=1 first before j=0
-        @lru_cache(None)
-        def maxLoot(i: int, willRob: bool) -> int:
-            if i >= len(nums):
-                return 0
-            if willRob:
-                return nums[i] + maxLoot(i+2, False)
-            return max( maxLoot(i, 1), maxLoot(i+1, 1) )
+#         @lru_cache(None)
+#         def maxLoot(i: int, willRob: bool) -> int:
+#             if i >= len(nums):
+#                 return 0
+#             if willRob:
+#                 return nums[i] + maxLoot(i+2, False)
+#             return max( maxLoot(i, True), maxLoot(i+1, True) )
         
-        return maxLoot(0, 0)
+#         return maxLoot(0, 0)
+        # O(n^2) time, O(n^2) space for recursive stack?
+        n = len(nums)
+        maxLoot = [[0 for i in range(n + 2)] for j in range(2)]
+        for i in range(n-1, -1, -1):
+            maxLoot[1][i] = nums[i] + maxLoot[0][i+2]
+            maxLoot[0][i] = max( maxLoot[1][i], maxLoot[1][i+1] )      
+                
+        return maxLoot[0][0]
+    
             
             
