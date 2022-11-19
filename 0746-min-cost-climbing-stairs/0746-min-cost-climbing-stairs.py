@@ -1,11 +1,12 @@
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
-        # minCost[i] = min(minCost[i+1] + minCost[i], minCost[i+2] + minCost[i])
-        # if i >= len(cost): return 0
-        @lru_cache(None)
-        def minCost(i):
-            if i >= len(cost):
-                return 0
-            return cost[i] + min(minCost(i+1), minCost(i+2))
+        # minCost[i] = cost[i] + min(minCost[i+1], minCost[i+2])        if i < len(cost)
+        # 0                                                             if i >= len(cost)
+        n = len(cost)
+        minCost = [-1 for i in range(n + 2)] # 2 placeholder value to represent when i >= len(cost) - 1
+        minCost[n], minCost[n+1] = 0, 0
         
-        return min(minCost(0), minCost(1))
+        for i in range(n-1, -1, -1):
+            minCost[i] = cost[i] + min(minCost[i+1], minCost[i+2])
+        
+        return min(minCost[0], minCost[1])
