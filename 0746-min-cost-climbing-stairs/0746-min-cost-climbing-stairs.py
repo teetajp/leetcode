@@ -2,7 +2,7 @@ class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
         # minCost[i] = min(minCost[i+1] + minCost[i], minCost[i+2] + minCost[i])
         # if i >= len(cost): return 0
-        @lru_cache
+        @lru_cache(None)
         def minCost(i):
             if i >= len(cost):
                 return 0
