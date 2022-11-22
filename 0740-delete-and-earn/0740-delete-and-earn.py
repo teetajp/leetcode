@@ -12,9 +12,10 @@ class Solution:
         
         dp = [0] * k
         dp[0] = sums[keys[0]]
-        
         dp[1] = max(dp[0], sums[keys[1]]) if keys[1] - keys[0] == 1 else sums[keys[1]] + dp[0]
-        for i in range(2, k):
+        
+        for i in range(2, k): # O(k) <= O(n)
             dp[i] = max(sums[keys[i]] + dp[i-2], dp[i-1]) if keys[i] - keys[i-1] == 1 else sums[keys[i]] + dp[i-1]
         
         return dp[k-1]
+        # O(nlogn) total
