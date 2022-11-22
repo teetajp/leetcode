@@ -10,7 +10,7 @@ class Solution:
         if k == 1:
             return sums[keys[0]]
         
-        dp = [0] * (k+1)
+        dp = [0] * k
         dp[0] = sums[keys[0]]
         
         dp[1] = max(dp[0], sums[keys[1]]) if keys[1] - keys[0] == 1 else sums[keys[1]] + dp[0]
