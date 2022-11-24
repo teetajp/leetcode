@@ -10,20 +10,35 @@
  */
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-        if (head == nullptr or head->next == nullptr) {
-            return head;
-        }
-        
-        ListNode* prev = head;
-        ListNode* curr = head->next;
-        head->next = nullptr;
-        while (curr != nullptr) {
-            ListNode* tmp = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = tmp;
+    ListNode* reverseList(ListNode* head) {        
+        ListNode *next = nullptr;
+        ListNode *prev = nullptr;
+        while (head) {
+            next = head->next;
+            head->next = prev;
+            prev = head;
+            head = next;
         }
         return prev;
     }
 };
+
+// class Solution {
+// public:
+//     ListNode* reverseList(ListNode* head) {
+//         if (head == nullptr or head->next == nullptr) {
+//             return head;
+//         }
+        
+//         ListNode* prev = head;
+//         ListNode* curr = head->next;
+//         head->next = nullptr;
+//         while (curr != nullptr) {
+//             ListNode* tmp = curr->next;
+//             curr->next = prev;
+//             prev = curr;
+//             curr = tmp;
+//         }
+//         return prev;
+//     }
+// };
