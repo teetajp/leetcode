@@ -14,3 +14,5 @@ class Solution:
             global_max = max(prevSum, global_max)
             
         return global_max
+    # O(n) time
+    # O(1) space
