@@ -8,11 +8,11 @@ class Solution:
         # O(1) space since the values are constrained by the range of ints
         #   - maybe O(n) space? not sure, since hash map since grows if there are more distinct vals
         
-        values_seen = dict()
+        values_seen = set()
         
         for val in nums:
             if val in values_seen:
                 return True
-            values_seen[val] = True
+            values_seen.add(val)
         
         return False
