@@ -15,10 +15,9 @@ class Solution:
                 return True
             elif target < mid_val:
                 r = mid_idx - 1
-            elif target > mid_val:
+            else:
                 l = mid_idx + 1
             
-        
         return False
     # O(log m*n) time for binary search
     # O(1) space
