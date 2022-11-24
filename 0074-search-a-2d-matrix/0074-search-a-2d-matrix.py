@@ -12,15 +12,12 @@ class Solution:
             mid_idx = l + (r - l) // 2 # median, rounded down
             mid_val = matrix[mid_idx // cols][mid_idx % cols] # index by row-major order
             
-            if (mid_val == target or
-                matrix[l // cols][l % cols] == target or
-                matrix[r // cols][r % cols] == target
-               ):
+            if mid_val == target:
                 return True
             elif target < mid_val:
-                return binarySearch(l+1, mid_idx - 1)
+                return binarySearch(l, mid_idx - 1)
             elif target > mid_val:
-                return binarySearch(mid_idx + 1, r - 1)
+                return binarySearch(mid_idx + 1, r)
         
         return binarySearch( 0, rows * cols - 1)
     # O(log n) time for binary search
