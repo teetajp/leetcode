@@ -1,7 +1,7 @@
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         # Start at middle value of middle row
-        # If middle value or endpoints is target val, return
+        # If middle value is target val, return
         # If less than, then check val in first col of row, if less than, recurse to lower row
         # If more than, then check val in last col of row, if target is >, then recurse to upper row
         rows, cols = len(matrix), len(matrix[0])
@@ -19,6 +19,6 @@ class Solution:
             elif target > mid_val:
                 return binarySearch(mid_idx + 1, r)
         
-        return binarySearch( 0, rows * cols - 1)
-    # O(log n) time for binary search
-    # O(log n) space for recursion stack
+        return binarySearch(0, rows * cols - 1)
+    # O(log m*n) time for binary search
+    # O(log m*n) space for recursion stack
