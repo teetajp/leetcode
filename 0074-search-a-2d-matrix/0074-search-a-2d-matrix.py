@@ -12,7 +12,10 @@ class Solution:
             mid = l + (r - l) // 2 # median, rounded down
             mid_idx = ( mid // cols, (mid % cols) )# need to get index by row-major order
             
-            if matrix[mid_idx[0]][mid_idx[1]] == target or matrix[l // cols][l % cols] == target or matrix[r // cols][r % cols] == target:
+            if (matrix[mid_idx[0]][mid_idx[1]] == target or
+                matrix[l // cols][l % cols] == target or
+                matrix[r // cols][r % cols] == target
+               ):
                 return True
             elif target < matrix[mid_idx[0]][mid_idx[1]]:
                 return binarySearch(l+1, mid - 1)
