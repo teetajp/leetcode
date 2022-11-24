@@ -8,8 +8,6 @@ class Solution:
         l, r = 0, rows * cols - 1
         
         while l <= r:
-            if r < l:
-                return False
             mid_idx = l + (r - l) // 2 # median, rounded down
             mid_val = matrix[mid_idx // cols][mid_idx % cols] # index by row-major order
             
