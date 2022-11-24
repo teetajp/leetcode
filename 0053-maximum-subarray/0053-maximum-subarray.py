@@ -1,12 +1,22 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-         # cur_max is the max subarray sum ending at i (dynamically choosing whether to reset and start new subarray at current index or to include current and append to previous subarray)
-        # max_over_i is the maximum sum we have seen till now (after i^th iterations)
-        cur_max, max_over_i = 0, -inf
-        for x in nums:
-            cur_max = max(x, cur_max + x)
-            max_over_i = max(max_over_i, cur_max)
-        return max_over_i
-    
-    # O(n) time
-    # O(1) space
+    # Let MaxSum(i) be the maximum sum of any subarray in the nums array from index 0 to index i.
+    #
+    # MaxSum(i) = { 0                                       if i < 0 or i >= n
+    #             { max( MaxSum(i-1) + max(0, nums[i]),     else    # previous subarray sum and include current value if positive 
+    #                  nums[i]                     )                # new subarray starting at index i
+    #       
+    # We want to compute the maximum MaxSum(i) for 0 <= i < n
+        n, global_max = len(nums), nums[0]
+        
+        def MaxSum(i: int) -> int:
+            if i < 0 or i >= n:
+                return 0
+            curr_max = nums[i] + max(0, MaxSum(i-1))
+            nonlocal global_max
+            global_max = max(global_max, curr_max)
+            return curr_max
+        
+        MaxSum(n-1)
+            
+        return global_max
