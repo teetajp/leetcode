@@ -10,8 +10,8 @@ class Solution:
         n, prevSum, global_max = len(nums), nums[0], nums[0]
         
         for i in range(1, n):
-            prevSum = nums[i] + max(0, prevSum)
-            global_max = max(prevSum, global_max)
+            prevSum = prevSum + nums[i] if prevSum > 0 else nums[i]
+            global_max = prevSum if prevSum > global_max else global_max
             
         return global_max
     # O(n) time
