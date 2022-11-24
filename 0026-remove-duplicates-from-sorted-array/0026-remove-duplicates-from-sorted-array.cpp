@@ -6,8 +6,7 @@ public:
         int r = 1; // right pointer which checks for the next distinct element to move to front
         while (r < nums.size()) {
             if (nums[r] != nums[r-1]) {
-                nums[l] = nums[r];
-                l++;
+                nums[l++] = nums[r];
             }
             r++;
         }
