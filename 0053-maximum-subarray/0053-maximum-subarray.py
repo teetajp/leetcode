@@ -7,9 +7,9 @@ class Solution:
     #                  nums[i]                     )                # new subarray starting at index i
     #       
     # We want to compute the maximum MaxSum(i) for 0 <= i < n
-        n, prevSum, global_max = len(nums), nums[0], nums[0]
+        prevSum, global_max = nums[0], nums[0]
         
-        for i in range(1, n):
+        for i in range(1, len(nums)):
             prevSum = prevSum + nums[i] if prevSum > 0 else nums[i]
             global_max = prevSum if prevSum > global_max else global_max
             
