@@ -7,10 +7,10 @@ class Solution:
     #                  nums[i]                     )                # new subarray starting at index i
     #       
     # We want to compute the maximum MaxSum(i) for 0 <= i < n
-        n, maxSum, global_max = len(nums), [nums[0]], nums[0]
+        n, prevSum, global_max = len(nums), nums[0], nums[0]
         
         for i in range(1, n):
-            maxSum.append(nums[i] + max(0, maxSum[i-1]))
-            global_max = max(maxSum[i], global_max)
+            prevSum = nums[i] + max(0, prevSum)
+            global_max = max(prevSum, global_max)
             
         return global_max
