@@ -23,3 +23,5 @@ class Solution:
                 return binarySearch(mid + 1, r - 1)
         
         return binarySearch( 0, rows * cols - 1)
+    # O(log n) time for binary search
+    # O(log n) space for recursion stack
