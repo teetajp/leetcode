@@ -4,11 +4,9 @@ class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         # initialize a min heap
         # iterate over the nums array O(n)
-        
-        # --- add/increment count of each int iterated from the nums array onto the min heap (max size k) - might be problematic? ---
         # OR use hashmap to keep a count of each freq, then iterate over the entries while using a min heap of size k
         
-        # Time Complexity: O(n) to iterate and count freq, O(k) + O((n-k)*logk) worst case for minheap
+        # Time Complexity: O(n) to iterate and count freq, O(k) + O((n-k)*logk) worst case for heao => O(n + k + (n-k)*log(k))
         # Space Complexity: O(k) for hashmap, O(k) for minheap => total O(k) if excluding input array
         freq = {}
         for n in nums:
