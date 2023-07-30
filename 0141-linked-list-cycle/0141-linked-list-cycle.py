@@ -7,13 +7,10 @@
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         fast, slow = head, head
-        if head is None:
-            return False
-            
+        # while we are still iterating (possibly stuck in cycle)
         while fast and fast.next:
-            fast = fast.next.next
-            slow = slow.next
+            slow, fast = slow.next, fast.next.next
+            if fast == slow: # pointers met in the cycle
+                return True
             
-            if fast == slow:
-                return True       
         return False
