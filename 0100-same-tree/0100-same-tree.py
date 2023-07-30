@@ -14,4 +14,7 @@ class Solution:
         
         # check children nodes
         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+    
+    # Time Complexity: O(n) where n is the total number of nodes (# in p + # in q)
+    # Space Complexity: O(log n) = O(h), aka the min height between p and q
         
