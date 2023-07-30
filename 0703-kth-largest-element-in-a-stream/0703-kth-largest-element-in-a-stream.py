@@ -17,7 +17,7 @@ class KthLargest:
             heapq.heappush(self.minHeap, -heapq.heappop(nums))
         
     def add(self, val: int) -> int:
-        # nums.append(val)
+        # Time complexity: O(log k)
         if len(self.minHeap) < self.k:
             heapq.heappush(self.minHeap, val)
         elif val > self.minHeap[0]:
