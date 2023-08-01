@@ -37,6 +37,8 @@ class Solution:
                 return True
         
         return False
-                
+    
+    # Time complexity: O(n) since we scan s1 and s2 once
+    # Space complexity: O(1) since we used a dictionary that stores a maximum of 26 characters
                 
         
