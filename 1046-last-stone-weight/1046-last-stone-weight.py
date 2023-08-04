@@ -16,3 +16,5 @@ class Solution:
                 heapq.heappush(stones, smash_result)
                 
         return 0 if not stones else -stones[0]
+    # Time Complexity: O(n + nlogn)
+    # Space Complexity: O(n)
