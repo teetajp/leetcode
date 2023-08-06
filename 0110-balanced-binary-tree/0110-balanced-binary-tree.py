@@ -6,14 +6,22 @@
 #         self.right = right
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        # Balanced when difference between left and right subtree is at most 1
-        if root is None:
-            return True
+        def getHeightBalance(cur: Optional[TreeNode]) -> tuple[bool, int]:
+            # returns a tuple (bool, int) with:
+            #   the bool representing whether the subtree is balanced
+            #   the int representing the height of the subtree
+            if not cur:
+                return (True, -1)
+            elif not cur.left and not cur.right:
+                return (True, 0) # no children
+            
+            isLeftBalanced, leftHeight = getHeightBalance(cur.left)
+            isRightBalanced, rightHeight = getHeightBalance(cur.right)
+            curHeight = max(leftHeight, rightHeight) + 1
+            
+            if not (isLeftBalanced and isRightBalanced) or abs(rightHeight - leftHeight) > 1:
+                return (False, curHeight) # contains unbalanced subtree
+            return (True, curHeight)
         
-        def getHeight(root: Optional[TreeNode]) -> int:
-            if root is None:
-                return 0
-            return max(getHeight(root.left), getHeight(root.right)) + 1
-        
-        return abs(getHeight(root.left) - getHeight(root.right)) <= 1 and self.isBalanced(root.left) and self.isBalanced(root.right)
-        
+        return getHeightBalance(root)[0]
+            
