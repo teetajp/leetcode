@@ -12,10 +12,11 @@ class Solution:
         if n == 0: return 0
         
         lis = [1] * n
-        
+        max_lis = 1
         for i in range(n-2, -1, -1):
             for j in range(i+1, n):
                 if nums[i] < nums[j]:
                     lis[i] = max(lis[i], lis[j]+1)
+            max_lis = max(max_lis, lis[i])
         
-        return max(lis)
+        return max_lis
