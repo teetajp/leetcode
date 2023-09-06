@@ -6,6 +6,7 @@ class Solution:
         LIS[n-1] = 1
         LIS[i] = max { 1 or LIS[i]                , if i+1 > n-1
                      { LIS[i+j] + 1  , if nums[i] < nums[i+j], for i+j <= n-1
+        final answer: max_i {LIS}
         """
         n = len(nums)
         if n == 0: return 0
