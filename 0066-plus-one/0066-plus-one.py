@@ -10,4 +10,4 @@ class Solution:
                 digits[i] += 1
                 # need to carry
                 return digits
-        return [1] + digits
+        return [1] + digits # append new leading 1 to the digits
