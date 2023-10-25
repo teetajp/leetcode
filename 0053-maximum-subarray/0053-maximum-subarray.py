@@ -1,18 +1,16 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-    # Let MaxSum(i) be the maximum sum of any subarray in the nums array from index 0 to index i.
-    #
-    # MaxSum(i) = { 0                                       if i < 0 or i >= n
-    #             { max( MaxSum(i-1) + max(0, nums[i]),     else    # previous subarray sum and include current value if positive 
-    #                  nums[i]                     )                # new subarray starting at index i
-    #       
-    # We want to compute the maximum MaxSum(i) for 0 <= i < n
-        prevSum, global_max = nums[0], nums[0]
-        
-        for i in range(1, len(nums)):
-            prevSum = prevSum + nums[i] if prevSum > 0 else nums[i]
-            global_max = prevSum if prevSum > global_max else global_max
+        # greedy sliding window?
+        max_sum = float("-inf")
+        cur_sum = 0
+        l, r = 0, 0
+        for r in range(len(nums)):
+            if cur_sum < 0:
+                cur_sum = 0
+                l = r
+                
+            cur_sum += nums[r]
             
-        return global_max
-    # O(n) time
-    # O(1) space
+            max_sum = max(max_sum, cur_sum)
+            
+        return max_sum
