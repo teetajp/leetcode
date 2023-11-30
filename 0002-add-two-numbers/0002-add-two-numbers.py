@@ -5,8 +5,10 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-    # space complexity: O(max(l1, l2) + 1) since the new number has either the same number of digits as the larger of the two numbers, or one more digit due to carry-on from addition
     # two pointers technique, and iterate over both lists together, digit by digit, while adding the sum of each digit to the new linkedlist, and we will keep a variable to store the carry
+    # space complexity: O(max(len(l1), len(l2)) + 1) since the new number has either the same number of digits as the larger of the two numbers, or one more digit due to carry-on from addition
+    # time complexity: O(max(len(l1), len(l2)) + 1)
+   
         sumList = ListNode(val=l1.val + l2.val)
         carry = 0
         head = None
