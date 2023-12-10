@@ -11,25 +11,28 @@ class Solution:
             m = len(nums) // 2
 
             left, right = mergeSort(nums[:m]), mergeSort(nums[m:])
+            
+            merge(left, right, nums)
+            
+            return nums
 
-            return merge(left, right)
 
-
-        def merge(left, right) -> List[int]:
+        def merge(left, right, output):
             # the two lists are already sorted
             # create a new list by appending the smallest element of the two lists until we run out of elements
-            output = []
-            l, r = 0, 0
-            while l < len(left) or r < len(right):
-                if r >= len(right) or (l < len(left) and left[l] <= right[r]):
-                    output.append(left[l])
+            l, r, k = 0, 0, 0
+            while l < len(left) and r < len(right):
+                if left[l] <= right[r]:
+                    output[k] = left[l]
                     l += 1
                 else:
-                    output.append(right[r])
+                    output[k] = right[r]
                     r += 1
+                
+                k += 1
+            
+            output[k:] = left[l:] if l < len(left) else right[r:]
 
-
-            return output
 
         return mergeSort(nums)
         
