@@ -1,21 +1,14 @@
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        # sliding window, must be increasing
-        if len(nums) == 0:
-            return 0
+        numsSet = set(nums)
+        maxLength = 0
         
-        nums.sort()
-        max_cnt, cur_cnt = 1, 1
-        for i in range(1, len(nums)):
-            if nums[i-1] == nums[i]:
-                # skip duplicates
-                continue
-            if nums[i-1] == nums[i] - 1:
-                cur_cnt += 1
-                max_cnt = max(max_cnt, cur_cnt)
-            else:
-                # if not consecutive, then reset count
-                cur_cnt = 1
+        for n in nums:
+            # check only start of sequences (numbers that have no left neighbor in the set)
+            if n - 1 not in numsSet:
+                length = 0
+                while n + length in numsSet:
+                    length += 1
+                maxLength = max(maxLength, length)
                 
-                
-        return max_cnt
+        return maxLength
