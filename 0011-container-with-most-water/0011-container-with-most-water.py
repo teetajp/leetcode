@@ -9,7 +9,7 @@ class Solution:
             
             if height[l] < height[r]:
                 l += 1
-            elif height[l] >= height[r]:
+            else:
                 r -= 1
     
         return max_area
