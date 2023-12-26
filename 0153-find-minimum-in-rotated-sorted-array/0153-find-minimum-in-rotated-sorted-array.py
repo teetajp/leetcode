@@ -9,13 +9,9 @@ class Solution:
             if nums[l] < nums[r]:
                 return nums[l]
             
-            # else nums[l] > nums[r] (all elems are unique)
-            mid = l + (r - l) // 2
-            if nums[mid] > nums[r]:
+            if nums[(mid := l + (r - l) // 2)] > nums[r]:
                 l = mid + 1
             else:
                 r = mid
                 
-                
-        
         return nums[r]
