@@ -9,7 +9,8 @@ class Solution:
             if nums[l] < nums[r]:
                 return nums[l]
             
-            if nums[(mid := l + (r - l) // 2)] > nums[r]:
+            mid = l + (r - l) // 2
+            if nums[l + (r - l) // 2] > nums[r]:
                 l = mid + 1
             else:
                 r = mid
