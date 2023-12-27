@@ -12,4 +12,4 @@ class Solution:
             else:
                 r = mid
                 
-        return nums[r]
+        return nums[l]
