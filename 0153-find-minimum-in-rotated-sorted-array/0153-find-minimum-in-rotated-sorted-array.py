@@ -6,7 +6,7 @@ class Solution:
             # if nums[l] < nums[r]:
                 # return nums[l]
             
-            mid = l + (r - l) // 2
+            mid = (r + l) // 2
             if nums[mid] > nums[r]:
                 l = mid + 1
             else:
