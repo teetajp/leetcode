@@ -3,49 +3,39 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-from collections import deque
-
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
         """
         Do not return anything, modify head in-place instead.
         """
-        # first node is head; (always defined)
+        # find middle node
+        fast, slow = head, head
+        while fast.next and fast.next.next:
+            slow, fast = slow.next, fast.next.next
+            
+        # slow pointer will be the middle in odd cases, and last of first list in even cases
         
-        # we are creating a new list in place, from outside inwards
-        
-        # first, find the middle element (if it exists), as to divide the llist into first and second half
-        # traverse through the second half of the llist and add nodes to a stack
-        
-        # create a new list by reassigning pointers by alternating between first and second list (stack), starting with first
-        # middle element will belong to first list
-        cur = head
-        length = 0
+        # reverse second half of the list
+        prev, cur = None, slow.next
         while cur:
-            length += 1
-            cur = cur.next
+            nxt = cur.next
+            prev, cur.next = cur, prev
+            cur = nxt
         
-        queue = deque([])
-        stack = []
-    
-        mid_idx = length // 2
-        cur = head.next
-        for i in range(1, length):
-            if i <= mid_idx:
-                queue.appendleft(cur)
-            else:
-                stack.append(cur)
+        # prev is now the head of second, reversed list
+        
+        slow.next = None # cut off the first half from the second half of the list, since they are now reversed
+        
+        # merge the two lists together
+        head1, head2 = head, prev
+        while head1 and head2:
+            head1_nxt, head2_nxt = head1.next, head2.next
             
-            cur = cur.next
+            head1.next = head2
+            head1 = head1_nxt
             
-        cur = head
-        for i in range(length - 1):
-            if stack:
-                cur.next = stack.pop()
-                cur = cur.next
-                
-            if queue:
-                cur.next = queue.pop()
-                cur = cur.next
-        cur.next = None
+            head2.next = head1
+            head2 = head2_nxt
+            
+            
         return head
