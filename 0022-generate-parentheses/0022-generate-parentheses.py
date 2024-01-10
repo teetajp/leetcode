@@ -21,14 +21,14 @@ class Solution:
         self.combos = set()
         self.stack = []
         self.n = n
-        self._helper(0, 0)
+        self._helper(0)
         
         
         
         return list(self.combos)
     
-    def _helper(self, numOpen, numClose):
-        length = numOpen + numClose # current number of iterations (0 to n - 1)
+    def _helper(self, numOpen):
+        numClose = len(self.stack) - numOpen
         
         # base case: can form full string
         if numOpen == numClose == self.n:
@@ -38,12 +38,12 @@ class Solution:
         
         if numOpen < self.n:
             self.stack.append('(')
-            self._helper(numOpen + 1, numClose)
+            self._helper(numOpen + 1)
             self.stack.pop()
         
         if numOpen > numClose:
             self.stack.append(')')
-            self._helper(numOpen, numClose + 1)
+            self._helper(numOpen)
             self.stack.pop()
         
         
