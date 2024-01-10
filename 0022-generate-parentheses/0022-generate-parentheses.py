@@ -15,12 +15,13 @@ class Solution:
         
         # when we open one, can open more or close
         # - can only open more when numOpen < n
-        self.combos = set()
+        # self.combos = set()
+        self.combos = []
         self.stack = []
         self.n = n
         self._generateParenthesisRecursive(0)
-        
-        return list(self.combos)
+        return self.combos
+        # return list(self.combos)
     
     def _generateParenthesisRecursive(self, numOpen):
         # we don't need `numClose` in the param as we can derive it from data
@@ -29,9 +30,11 @@ class Solution:
         # base case: can form full string
         if numOpen == numClose == self.n:
             result_str = ''.join(self.stack)
-            if result_str not in self.combos:
-                self.combos.add(result_str)
+            self.combos.append(result_str)
             return
+            # if result_str not in self.combos:
+            #     self.combos.add(result_str)
+            # return
         
         if numOpen < self.n:
             self.stack.append('(')
