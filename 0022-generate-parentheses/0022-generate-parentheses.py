@@ -11,14 +11,16 @@ class Solution:
         # base case: can form full string
         if numOpen == numClose == self.n:
             self.res.append(''.join(self.stack))
+            self.stack.pop()
             return
         
         if numOpen < self.n:
             self.stack.append('(')
             self._generateParenthesisRecursive(numOpen + 1)
-            self.stack.pop()
         
         if numOpen > numClose:
             self.stack.append(')')
             self._generateParenthesisRecursive(numOpen)
+            
+        if self.stack:
             self.stack.pop()
