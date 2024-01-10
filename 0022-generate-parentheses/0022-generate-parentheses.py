@@ -28,6 +28,7 @@ class Solution:
         return list(self.combos)
     
     def _helper(self, numOpen):
+        # we don't need `numClose` in the param as we can derive it from data
         numClose = len(self.stack) - numOpen
         
         # base case: can form full string
