@@ -1,35 +1,51 @@
-from collections import deque
-
-class Parentheses:
-    def __init__(self, str, open_count, closed_count):
-        self.str = str
-        self.open_count = open_count
-        self.closed_count = closed_count
-        
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        result = []
-        queue = deque([])
-        queue.append(Parentheses([], 0, 0))
+        # two options:
+        # - outside, inside
         
-        while queue:
-            ps = queue.popleft()
-            
-            if ps.open_count == n and ps.closed_count == n:
-                result.append(''.join(ps.str))
-            else:
-                # open a new parenthesis
-                if ps.open_count < n:
-                    queue.append(Parentheses(
-                        list(ps.str) + ['('],
-                        ps.open_count + 1,
-                        ps.closed_count))
-                
-                # close a parenthesis
-                if ps.closed_count < ps.open_count:
-                    queue.append(Parentheses(
-                    list(ps.str) + [')'],
-                    ps.open_count,
-                    ps.closed_count + 1))
-                    
-        return result
+        # OR:
+        # open, close
+
+        # at the end:
+        # - numOpen == numClose = n
+        
+        # at any point:
+        # - numOpen >= numClose (cannot have more close than open)
+        
+        # when numOpen >= numClose:
+        # - can either open more if numOpen < n (otherwise 1 option)
+        # - or close
+        
+        # when we open one, can open more or close
+        # - can only open more when numOpen < n
+        self.combos = set()
+        self.stack = []
+        self.n = n
+        self._helper(0, 0)
+        
+        
+        
+        return list(self.combos)
+    
+    def _helper(self, numOpen, numClose):
+        length = numOpen + numClose # current number of iterations (0 to n - 1)
+        
+        # base case: can form full string
+        if numOpen == numClose == self.n:
+            result_str = ''.join(self.stack)
+            self.combos.add(result_str)
+            return
+        
+        if numOpen < self.n:
+            self.stack.append('(')
+            self._helper(numOpen + 1, numClose)
+            self.stack.pop()
+        
+        if numOpen > numClose:
+            self.stack.append(')')
+            self._helper(numOpen, numClose + 1)
+            self.stack.pop()
+        
+        
+        # removed = stack.pop()
+        # no need to update numOpen/numClose as its local to each func call
