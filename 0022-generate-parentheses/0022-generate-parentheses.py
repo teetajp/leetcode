@@ -29,7 +29,8 @@ class Solution:
         # base case: can form full string
         if numOpen == numClose == self.n:
             result_str = ''.join(self.stack)
-            self.combos.add(result_str)
+            if result_str not in self.combos:
+                self.combos.add(result_str)
             return
         
         if numOpen < self.n:
