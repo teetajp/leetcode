@@ -1,9 +1,6 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        # two options:
-        # - outside, inside
-        
-        # OR:
+        # Two options:
         # open, close
 
         # at the end:
@@ -21,13 +18,11 @@ class Solution:
         self.combos = set()
         self.stack = []
         self.n = n
-        self._helper(0)
-        
-        
+        self._generateParenthesisRecursive(0)
         
         return list(self.combos)
     
-    def _helper(self, numOpen):
+    def _generateParenthesisRecursive(self, numOpen):
         # we don't need `numClose` in the param as we can derive it from data
         numClose = len(self.stack) - numOpen
         
@@ -39,14 +34,10 @@ class Solution:
         
         if numOpen < self.n:
             self.stack.append('(')
-            self._helper(numOpen + 1)
+            self._generateParenthesisRecursive(numOpen + 1)
             self.stack.pop()
         
         if numOpen > numClose:
             self.stack.append(')')
-            self._helper(numOpen)
+            self._generateParenthesisRecursive(numOpen)
             self.stack.pop()
-        
-        
-        # removed = stack.pop()
-        # no need to update numOpen/numClose as its local to each func call
