@@ -39,10 +39,6 @@ class TimeMap:
             
         return last
     
-            
-        
-        
-
 
 # Your TimeMap object will be instantiated and called as such:
 # obj = TimeMap()
