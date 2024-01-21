@@ -8,6 +8,9 @@ class TimeMap:
         # timestamp is also of fixed length, so technically worst-case space complexity is O(100 * 26 * 10^7) = O(1)
 
     def set(self, key: str, value: str, timestamp: int) -> None:
+        # worst time complexity: O(n)
+        # amoritzed time complexity: O(1)
+        
         # strictly increasing `timestamp` will be used as args
         if key not in self.hashmap:
             self.hashmap[key] = []
@@ -16,6 +19,7 @@ class TimeMap:
         
 
     def get(self, key: str, timestamp: int) -> str:
+        # worst time complexity: O(log n)
         vals = self.hashmap.get(key, [])
         
         # finds the position closest to the timestamp specified using binary search
@@ -34,6 +38,7 @@ class TimeMap:
                 return vals[m][1]
             
         return last
+    
             
         
         
