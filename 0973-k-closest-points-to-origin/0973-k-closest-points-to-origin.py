@@ -1,4 +1,4 @@
-import heapq
+from heapq import heapify, heappushpop
 from math import sqrt
 
 class Solution:
@@ -15,14 +15,14 @@ class Solution:
             return sqrt(x**2 + y**2)
         
         maxHeap = [(-distToOrigin(*points[i]), points[i]) for i in range(k)] 
-        heapq.heapify(maxHeap) 
+        heapify(maxHeap) 
         
         for i in range(k, len(points)):
             # iterate over the remaining elements: (k+1)th to nth elem
             cur_dist = distToOrigin(*points[i])
             if cur_dist < -maxHeap[0][0]:
                 # smaller distance than the current min kth in heap, replace it
-                heapq.heappushpop(maxHeap, (-cur_dist, points[i]))
+                heappushpop(maxHeap, (-cur_dist, points[i]))
         
         return [point for (dist, point) in maxHeap]
     
