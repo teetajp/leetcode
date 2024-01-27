@@ -24,7 +24,7 @@ class Solution:
                 # smaller distance than the current min kth in heap, replace it
                 heapq.heappushpop(maxHeap, (-cur_dist, points[i]))
         
-        return [dist_point[1] for dist_point in maxHeap]
+        return [point for (dist, point) in maxHeap]
     
     # time complexity: O(k) + O( (n-k)*log(k) ) + O(k) = O(k + (n-k)*log(k))
     # space complexity: O(k) ; (excluding initial input list size of n)
