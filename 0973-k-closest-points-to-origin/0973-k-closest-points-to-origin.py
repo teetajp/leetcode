@@ -12,8 +12,6 @@ class Solution:
         #           then pop the top elem and push the point onto the max heap
         #       - if point is larger than top of the heap, do nothing
         def distToOrigin(x: int, y: int) -> int:
-            # since sqrt((x-0)^2) == sqrt(x^2) == abs(x), we can just use that as well
-            # return abs(x) + abs(y)
             return sqrt(x**2 + y**2)
         
         maxHeap = [(-distToOrigin(*points[i]), points[i]) for i in range(k)] 
@@ -27,3 +25,6 @@ class Solution:
                 heapq.heappushpop(maxHeap, (-cur_dist, points[i]))
         
         return [dist_point[1] for dist_point in maxHeap]
+    
+    # time complexity: O(k) + O( (n-k)*log(k) ) + O(k) = O(k + (n-k)*log(k))
+    # space complexity: O(k) ; (excluding initial input list size of n)
