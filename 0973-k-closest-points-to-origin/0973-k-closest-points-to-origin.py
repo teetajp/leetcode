@@ -19,11 +19,10 @@ class Solution:
         
         for i in range(k, len(points)):
             # iterate over the remaining elements: (k+1)th to nth elem
-            p = points[i]
-            cur_dist = distToOrigin(*p)
+            cur_dist = distToOrigin(*points[i])
             if cur_dist < -maxHeap[0][0]:
                 # smaller distance than the current min kth in heap, replace it
-                heapq.heappushpop(maxHeap, (-cur_dist, p))
+                heapq.heappushpop(maxHeap, (-cur_dist, points[i]))
         
         return [point for (dist, point) in maxHeap]
     
