@@ -11,10 +11,8 @@ class Solution:
         # > pop and update everything from top of stack till not higher
         answer = []
         stack = [] # keeps track of day indices
-        for i in range(len(temperatures)):
-            cur_tmp = temperatures[i]
-            
-            while stack and temperatures[stack[-1]] < cur_tmp:
+        for i in range(len(temperatures)):            
+            while stack and temperatures[stack[-1]] < temperatures[i]:
                 # while exists a previous day cooler than ith day that has not been updated
                 prev_idx = stack.pop() # get most recent unupdated cooler day
                 answer[prev_idx] = i - prev_idx # num of days between
