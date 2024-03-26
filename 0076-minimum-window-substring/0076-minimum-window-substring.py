@@ -12,7 +12,7 @@ class Solution:
         # keep a counter of character freqs that have been met (freq of 0 or lower)
         # if character not in freqs, then ignore it
         # can use queue or two pointers for the window, use two pointers here to save space
-        # => first grow window on right until hit min (increment char freqs), then shrink (decrement char freqs) from left to minimum
+        # => first grow window on right until hit min_freq_met (increment char freqs), then shrink (decrement char freqs) from left to minimize window size
         l, r = 0, 0
         min_window_idx = None
         while r < m:
