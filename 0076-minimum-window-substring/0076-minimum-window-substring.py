@@ -1,5 +1,13 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
+        # iterating through s once
+        # keep a counter of character freqs that have been met (freq of 0 or lower)
+        # if character not in freqs, then ignore it
+        # can use queue or two pointers for the window, use two pointers here to save space
+        # => first grow window on right until hit min_freq_met (increment char freqs), then shrink (decrement char freqs) from left to minimize window size
+        
+        # time: O(m + n) to iterate through s at most twice (once for right pointer and once for left pointer), iterate through t once
+        # space: O(n) : Freq dict to keep count of all chars in t. (If we used queue for window, then O(max(m, n)) = O(m + n)
         m, n = len(s), len(t)
         freqs = {}
         
@@ -8,11 +16,7 @@ class Solution:
             
         cur_freq_met, min_freq_met = 0, len(freqs)
             
-        # iterating through s once
-        # keep a counter of character freqs that have been met (freq of 0 or lower)
-        # if character not in freqs, then ignore it
-        # can use queue or two pointers for the window, use two pointers here to save space
-        # => first grow window on right until hit min_freq_met (increment char freqs), then shrink (decrement char freqs) from left to minimize window size
+        
         l, r = 0, 0
         min_window_idx = None
         while r < m:
@@ -48,7 +52,3 @@ class Solution:
             r += 1
             
         return s[min_window_idx[0] : min_window_idx[1] + 1] if min_window_idx else ""
-    
-    
-# time: O(m + n) to iterate through s at most twice (once for right pointer and once for left pointer), iterate through t once
-# space: O(n) : Freq dict to keep count of all chars in t. Although, our window could expand over the whole string s if we dont find all char freq in t, since we use two pointers, its constant space for that.
