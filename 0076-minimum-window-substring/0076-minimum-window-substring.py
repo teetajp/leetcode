@@ -47,7 +47,8 @@ class Solution:
                     
             r += 1
             
-            
-            
-            
         return s[min_window_idx[0] : min_window_idx[1] + 1] if min_window_idx else ""
+    
+    
+# time: O(m + n) to iterate through s at most twice (once for right pointer and once for left pointer), iterate through t once
+# space: O(max(m, n)) or O(m + n) : our window could expand over the whole string s if we dont find all char freq in t
