@@ -11,7 +11,7 @@ class Solution:
         # iterating through s once
         # keep a counter of character freqs that have been met (freq of 0 or lower)
         # if character not in freqs, then ignore it
-        # can use queue or two pointers for the window
+        # can use queue or two pointers for the window, use two pointers here to save space
         # => first grow window on right until hit min (increment char freqs), then shrink (decrement char freqs) from left to minimum
         l, r = 0, 0
         min_window_idx = None
@@ -51,4 +51,4 @@ class Solution:
     
     
 # time: O(m + n) to iterate through s at most twice (once for right pointer and once for left pointer), iterate through t once
-# space: O(max(m, n)) or O(m + n) : our window could expand over the whole string s if we dont find all char freq in t
+# space: O(n) : Freq dict to keep count of all chars in t. Although, our window could expand over the whole string s if we dont find all char freq in t, since we use two pointers, its constant space for that.
