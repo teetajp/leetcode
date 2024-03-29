@@ -8,7 +8,6 @@ class Solution:
         pos_speed = sorted(zip(position, speed), key = lambda x : x[0])
         num_fleets = n # there is always at least one car
         
-        print(pos_speed)
         
         pos_ahead, speed_ahead = pos_speed.pop() # car closest to dest
         tta_ahead = (target - pos_ahead) / speed_ahead
