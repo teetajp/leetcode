@@ -1,12 +1,9 @@
 class Solution:
     def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
         n = len(position)
-        # rate limited by the car at the top
-        
-        # number of unique car speeds and position at the end
         # all positions unique, so no need for secondary key
         pos_speed = sorted(zip(position, speed), key = lambda x : x[0])
-        num_fleets = n # there is always at least one car
+        num_fleets = n # all pos unique at first, so n fleets, merge to reduce
         
         
         pos_ahead, speed_ahead = pos_speed.pop() # car closest to dest
