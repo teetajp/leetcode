@@ -17,9 +17,8 @@ class Solution:
                 
             stack.append(best_cur_rect)
                 
-        while stack:
-            rect = stack.pop()
-            max_area = max(max_area, rect[0] * (n-1 - rect[1] + 1))
+        for height, start_idx in stack:
+            max_area = max(max_area, height * (n - start_idx))
             
         return max_area
             
