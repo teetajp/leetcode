@@ -5,21 +5,6 @@
 #         self.next = next
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        """
-        Constraints:
-
-        The number of nodes in the list is sz.
-        1 <= sz <= 30
-        0 <= Node.val <= 100
-        1 <= n <= sz
-
-        ----
-        Cases:
-        - sz = 1, then n = 1:
-            return head
-
-        Assuming the index n is always valid; that is, there is always at least n nodes in linkedlist.   
-        """
         # Two Pointers
         # Initialize two nodes, with lagging pointer (n - 1) nodes behind the pointer ahead.
         # Then move at the same pace until pointer ahead hits the end of the list.
