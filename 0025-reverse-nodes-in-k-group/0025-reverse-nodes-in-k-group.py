@@ -5,10 +5,11 @@
 #         self.next = next
 class Solution:
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        """Since we are not sure when the list will end and whether there will be a list of nodes at the end that is not a multiple of k, we need to either traverse through the whole list of nodes and count them all first, or we need to traverse each k nodes at a time then reverse them (same time complexity)."""
+        
         if (not head) or (not head.next) or k == 1:
             return head
         
-        """Since we are not sure when the list will end and whether there will be a list of nodes at the end that is not a multiple of k, we need to either traverse through the whole list of nodes and count them all first, or we need to traverse each k nodes at a time then reverse them (same time complexity)."""
         sublist_len = 1
         curr = head
         first_new_head = None
