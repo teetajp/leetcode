@@ -19,9 +19,7 @@ class Solution:
         """
         minHeap = [] # O(k) space
         for idx, node in enumerate(lists):
-            # TODO: what if one list is shorter or "None"
             if node:
-                # (node.val, idx of linkedlist in list if there is next)
                 minHeap.append((node.val, node))
         
         heapq.heapify(minHeap) # O(k)
@@ -44,3 +42,6 @@ class Solution:
                 heapq.heappop(minHeap)
         
         return head.next
+    
+# Time complexity: O(k + n log k) = O(n log k)
+# Space complexity: O(k) for heap
