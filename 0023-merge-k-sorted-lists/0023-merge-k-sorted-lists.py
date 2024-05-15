@@ -4,10 +4,12 @@ import heapq
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
+# implement custom comparator for linkedlist nodes for heapq comparison
 def node_lt(self, other):
     return self.val <= other.val
 
-ListNode.__lt__ = node_lt
+ListNode.__lt__ = node_lt 
 
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
