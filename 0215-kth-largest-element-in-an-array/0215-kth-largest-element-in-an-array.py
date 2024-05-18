@@ -14,3 +14,5 @@ class Solution:
             k -= min(k, num_count)
         
         return -num_val
+    
+    # runtime: O(n + k log n)
