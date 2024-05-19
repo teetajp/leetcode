@@ -3,22 +3,10 @@ import heapq
 
 class Twitter:
     # number of tweets >> number of users and followers
-    # => takes longer to filter the list of all tweets than sending tweets to users following them
-    # Since user might (un)follow to a new user and need to retrieve older tweets and push
-    # them to the news feed, then queue will not keep them sorted (only works if news feed takes displays new tweets from new followers only)
-    
-    # When user unfollows, want to filter out all the tweets of the unfollowedID from heap
-    #   then pull tweets again and reheapify
-    
-    # need to clear heap?
-    
-    # when user follows, need to add the followingID's tweets and heapify in heap
-    
-    # keep up to 10 most recent tweets of all followers, so can filter and reheapify without fetching new
-    # maybe dont delete from queue, just pop until see something new
+
     def __init__(self):
         self.newsfeeds = defaultdict(list) # key: userID, value: maxheap based on tweetID
-        self.tweets =  defaultdict(deque) # key: userID, value: list of 10 most recent tweets (technically should store all)
+        self.tweets =  defaultdict(deque) # key: userID, value: list of 10 most recent tweets
         self.max_feed_len = 10
         self.followers = defaultdict(set)
         self.followees = defaultdict(set)
@@ -32,13 +20,12 @@ class Twitter:
             # remove oldest tweet if user tweeted has more than 10 tweets
             self.tweets[userId].popleft()
         
-        
-        # TODO: update users' newsfeeds?
-        # XXX: if user unsubs before get newsfeed, then might be unnecessary work
         if userId not in self.followers[userId]:
+            # add "self" as subscriber to own tweets
             self.followers[userId].add(userId)
             self.followees[userId].add(userId)
-            
+        
+        # Update users' newsfeeds?
         for follower in self.followers[userId]:
             heapq.heappush(self.newsfeeds[follower], (-self.time, tweetId, userId))
         
@@ -54,14 +41,15 @@ class Twitter:
             tweetTime, tweetId, followeeId = heapq.heappop(self.newsfeeds[userId])
             
             if followeeId in self.followees[userId]:
+                # only display tweets from those the user is following
                 res_tweetTimes.append(tweetTime)
                 res_tweetIds.append(tweetId)
                 res_tweetUserIds.append(followeeId)
-                
-            # tweet is from some unfollowed followee; ignore
         
         # reinsert tweets back into heap
-        for tweetTime, tweetId, followeeId in zip(res_tweetTimes, res_tweetIds, res_tweetUserIds):
+        for tweetTime, tweetId, followeeId in zip(res_tweetTimes,
+                                                  res_tweetIds,
+                                                  res_tweetUserIds):
             heapq.heappush(self.newsfeeds[userId], (tweetTime, tweetId, followeeId))
                 
         return res_tweetIds
@@ -83,7 +71,7 @@ class Twitter:
             return
         
         # could filter and reheapify newsfeed here OR leave it to the newsfeed method
-        
+        # XXX: if user unsubs before get newsfeed, then filtering and reheapify might be unnecessary work
         self.followers[followeeId].remove(followerId)
         self.followees[followerId].remove(followeeId)
         
