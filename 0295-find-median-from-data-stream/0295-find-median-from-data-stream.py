@@ -12,11 +12,8 @@ class MedianFinder:
         else:
             displacedNum = heapq.heappushpop(self.maxHeap, -num)
             heapq.heappush(self.minHeap, -displacedNum)
-        
 
     def findMedian(self) -> float:
-        # assuming there is always at least one element in one of the heaps
-        
         if len(self.minHeap) > len(self.maxHeap):
             return self.minHeap[0] 
         elif len(self.minHeap) < len(self.maxHeap):
