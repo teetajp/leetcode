@@ -3,11 +3,10 @@ class MedianFinder:
     def __init__(self):
         self.minHeap = [] # top 50%
         self.maxHeap = [] # bottom 50%
-        # bias towards minHeap if uneven counts
-        
 
     def addNum(self, num: int) -> None:
         if len(self.minHeap) >= len(self.maxHeap):
+            # bias towards minHeap if uneven counts
             displacedNum = heapq.heappushpop(self.minHeap, num)
             heapq.heappush(self.maxHeap, -displacedNum)
         else:
