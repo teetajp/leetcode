@@ -1,10 +1,3 @@
-import heapq
-
-
-# [1], [2], [3], [4] [0]
-
-# minHeap: [3] [4]
-# maxHeap: [0] [1] [2]
 class MedianFinder:
 
     def __init__(self):
