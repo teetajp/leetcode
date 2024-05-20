@@ -22,33 +22,36 @@ class Trie:
         
 
     def insert(self, word: str) -> None:
-        node = self.findNodeCreate(self.root, list(word), 0)
+        self.word = word
+        node = self.findNodeCreate(self.root, 0)
         node.isWordSuffix = True
 
     def search(self, word: str) -> bool:
-        node = self.findNodeStop(self.root, list(word), 0)
+        self.word  = word
+        node = self.findNodeStop(self.root, 0)
         return node and node.isWordSuffix
         
 
     def startsWith(self, prefix: str) -> bool:
-        node = self.findNodeStop(self.root, list(prefix), 0)
+        self.word = prefix
+        node = self.findNodeStop(self.root, 0)
         # check if current node is a word or prefix of some word
         return node and (node.isWordSuffix or len(node.children) > 0)
             
     
-    def findNodeCreate(self, node: Node, word: list[str], idx: int) -> Node:
+    def findNodeCreate(self, node: Node, idx: int) -> Node:
         # create nodes while traversing path
-        if idx < len(word):
-            return self.findNodeCreate(node.children[word[idx]], word, idx+1)
+        if idx < len(self.word):
+            return self.findNodeCreate(node.children[self.word[idx]], idx+1)
         else:
             return node
     
-    def findNodeStop(self, node: Node, word: list[str], idx: int) -> Node:
+    def findNodeStop(self, node: Node, idx: int) -> Node:
         # search for word, stopping early
         #   if node we're in doesn't have suffix we are looking for
-        if idx < len(word) and word[idx] in node.children:
-            return self.findNodeStop(node.children[word[idx]], word, idx+1)
-        elif idx == len(word):
+        if idx < len(self.word) and self.word[idx] in node.children:
+            return self.findNodeStop(node.children[self.word[idx]], idx+1)
+        elif idx == len(self.word):
             return node
         else:
             return None
