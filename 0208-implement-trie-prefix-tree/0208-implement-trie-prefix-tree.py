@@ -13,7 +13,7 @@ class Trie:
 
     def insert(self, word: str) -> None:
         self.word = word
-        node = self.findNodeCreate(self.root, 0)
+        node = self.findNodeCreate(word)
         node.isWordSuffix = True
 
     def search(self, word: str) -> bool:
@@ -29,12 +29,14 @@ class Trie:
         return node and (node.isWordSuffix or len(node.children) > 0)
             
     
-    def findNodeCreate(self, node: Node, idx: int) -> Node:
+    def findNodeCreate(self, word: int) -> Node:
         # create nodes while traversing path
-        if idx < len(self.word):
-            return self.findNodeCreate(node.children[self.word[idx]], idx+1)
-        else:
-            return node
+        idx = 0
+        cur = self.root
+        while idx < len(word):
+            cur = cur.children[word[idx]]
+            idx += 1
+        return cur
     
     def findNodeStop(self, node: Node, idx: int) -> Node:
         # search for word, stopping early
