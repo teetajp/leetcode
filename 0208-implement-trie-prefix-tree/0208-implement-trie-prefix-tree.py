@@ -29,7 +29,7 @@ class Trie:
     def startsWith(self, prefix: str) -> bool:
         node = self.findNodeStop(prefix)
         # check if current node is a word or prefix of some word
-        return node and (node.isWordSuffix or len(node.children) > 0)
+        return (node is not None)
     
     def findNodeStop(self, word: str) -> Node:
         # search for word, stopping early
