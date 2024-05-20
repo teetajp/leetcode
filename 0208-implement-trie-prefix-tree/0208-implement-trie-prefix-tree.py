@@ -1,24 +1,14 @@
-class keydefaultdict(defaultdict):
-    def __missing__(self, key):
-        if self.default_factory is None:
-            raise KeyError(key)
-        else:
-            ret = self[key] = self.default_factory(key)
-            return ret
-    # https://stackoverflow.com/questions/31723719/how-to-use-a-specific-data-structure-as-the-default-factory-for-a-defaultdict
-    # defaultdict but uses key as argument of the default factory/constructor
 class Node:
-    def __init__(self, val = "", isWordSuffix = False):
-        self.val = val
+    def __init__(self, isWordSuffix = False):
         # map or array with 26 boolean vals; use map to save space
-        self.children = keydefaultdict(Node)
+        self.children = defaultdict(Node)
         self.isWordSuffix = isWordSuffix
         
 class Trie:
 
     def __init__(self):
         # each level stores array of the alphabet (26 chars), all lowercase
-        self.root = Node(val="", isWordSuffix=False)
+        self.root = Node(isWordSuffix=False)
         
 
     def insert(self, word: str) -> None:
