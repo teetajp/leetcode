@@ -22,18 +22,6 @@ class Trie:
         cur.isWordSuffix = True
 
     def search(self, word: str) -> bool:
-        node = self.findNodeStop(word)
-        return node and node.isWordSuffix
-        
-
-    def startsWith(self, prefix: str) -> bool:
-        node = self.findNodeStop(prefix)
-        # check if current node is a word or prefix of some word
-        return (node is not None)
-    
-    def findNodeStop(self, word: str) -> Node:
-        # search for word, stopping early
-        #   if node we're in doesn't have suffix we are looking for
         idx = 0
         cur = self.root
         while idx < len(word):
@@ -41,8 +29,21 @@ class Trie:
                 cur = cur.children[word[idx]]
                 idx += 1
             else:
-                return None
-        return cur
+                return False
+        return cur.isWordSuffix
+        
+
+    def startsWith(self, prefix: str) -> bool:
+        # check if current node is a word or prefix of some word
+        idx = 0
+        cur = self.root
+        while idx < len(prefix):
+            if prefix[idx] in cur.children:
+                cur = cur.children[prefix[idx]]
+                idx += 1
+            else:
+                return False
+        return True
 
 
 # Your Trie object will be instantiated and called as such:
