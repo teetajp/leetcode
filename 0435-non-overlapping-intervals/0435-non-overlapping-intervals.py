@@ -3,17 +3,22 @@ import heapq
 class Solution:
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:        
         # modify intervals list to work with heap with min START and max END
-        for i in range(len(intervals)):
-            intervals[i][1] *= -1
+        # for i in range(len(intervals)):
+            # intervals[i][1] *= -1
+            
         
-        heapq.heapify(intervals)
+        # heapq.heapify(intervals)
+        heap = []
+        while intervals:
+            start, end = intervals.pop()
+            heapq.heappush(heap, (start, -end))
         
         print(intervals)
         removed = 0
-        curStart, curEnd = heapq.heappop(intervals) # curEnd is negated
+        curStart, curEnd = heapq.heappop(heap) # curEnd is negated
         
-        while intervals:
-            nextStart, nextEnd = heapq.heappop(intervals)
+        while heap:
+            nextStart, nextEnd = heapq.heappop(heap)
             
             # need to bound between curstart and curEnd
             if nextStart >= -curEnd:
