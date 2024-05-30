@@ -10,18 +10,16 @@ class Solution:
         #     start, end = intervals.pop()
         #     heapq.heappush(heap, (start, -end))
         
-        heap = intervals
-        heap.sort(key=lambda x: (x[0], -x[1]))
+        intervals.sort(key=lambda x: (x[0], -x[1]))
             
         # O(nlogn) to process heap while modifying key
         # O(n) to modify intervals in place then heapify
         
         removed = 0
-        curStart, curEnd = heap[0] # curEnd is negated
-        print(heap)
+        curStart, curEnd = intervals[0] # curEnd is negated
         
-        for i in range(1, len(heap)):
-            nextStart, nextEnd = heap[i]
+        for i in range(1, len(intervals)):
+            nextStart, nextEnd = intervals[i]
             
             # need to bound between curstart and curEnd
             if nextStart >= curEnd:
