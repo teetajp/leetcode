@@ -7,6 +7,9 @@ class Solution:
         while intervals:
             start, end = intervals.pop()
             heapq.heappush(heap, (start, -end))
+            
+        # O(nlogn) to process heap while modifying key
+        # O(n) to modify intervals in place then heapify
         
         removed = 0
         curStart, curEnd = heapq.heappop(heap) # curEnd is negated
