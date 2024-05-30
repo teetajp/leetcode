@@ -1,5 +1,10 @@
 import heapq
 
+def intervals_lt(self, other):
+    return self[0] < other[0] or (self[0] == other[0] and self[1] >= other[1])
+
+List.__lt__ = intervals_lt
+    
 class Solution:
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:        
         # modify intervals list to work with heap with min START and max END    
