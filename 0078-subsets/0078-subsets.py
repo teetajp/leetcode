@@ -7,7 +7,5 @@ class Solution:
         for int_elem in nums:
             for i in range(len(res)):
                 res.append(res[i].copy() + [int_elem])
-                
-        
         
         return res
