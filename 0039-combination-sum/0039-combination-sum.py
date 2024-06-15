@@ -1,5 +1,8 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        # sort in decreasing order
+        # so we can try to sum larger nums first then fit smaller
+        # and skip summing candidates that are too big to save time
         candidates.sort(reverse=True)
         res = []
         
@@ -24,3 +27,6 @@ class Solution:
         combinationSumRec([], 0, target)
                 
         return res
+    
+# Time Complexity: O(n log n + target / min(candidates)) or O(nlogn + target)
+# Space Complexity: O(n + target)
