@@ -28,5 +28,5 @@ class Solution:
                 
         return res
     
-# Time Complexity: O(n log n + target / min(candidates)) or O(nlogn + target)
+# Time Complexity: O(n log n + 2^(target / min(candidates)) or O(nlogn + 2^target)
 # Space Complexity: O(n + target)
