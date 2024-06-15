@@ -1,6 +1,6 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        candidates.sort() # sort to ensure candidates are ordered
+        # candidates.sort() # sort to ensure candidates are ordered
         
         # try in decreasing or increasing order of candidate magnitude
         res = []
