@@ -9,6 +9,7 @@ class Solution:
         # alternate between each gate? or continue if we have lower values
         # flood fill in iterations
         INF = 2147483647
+        DIRS = ((-1, 0), (0, -1), (1, 0), (0, 1))
         m, n = len(rooms), len(rooms[0])
         queue = deque() # yet to explore
         
@@ -18,10 +19,7 @@ class Solution:
                 # cell is a gate
                 if rooms[i][j] == 0:
                     # add cells to explore
-                    queue.append( (i-1, j, 1) )
-                    queue.append( (i, j-1, 1) )
-                    queue.append( (i+1, j, 1) )
-                    queue.append( (i, j+1, 1) )
+                    queue.append( (i, j) )
         
         def isEmptyRoom(i, j):
             return i >= 0 and i < m and j >= 0 and j < n and rooms[i][j] == INF
@@ -29,13 +27,13 @@ class Solution:
         # if a room has been visited earlier than another, it is guaranteed to have
         # a lower distance due to BFS
         while queue:
-            i, j, dist = queue.popleft()
-            if not isEmptyRoom(i, j):
-                continue # room out of bound or visited with shorter dist or not empty
+            i, j = queue.popleft()
             
-            
-            rooms[i][j] = dist
-            queue.append( (i-1, j, dist + 1) )
-            queue.append( (i, j-1, dist + 1) )
-            queue.append( (i+1, j, dist + 1) )
-            queue.append( (i, j+1, dist + 1) )
+            for dx, dy in DIRS:
+                new_i, new_j = i + dx, j + dy
+                
+                if isEmptyRoom(new_i, new_j):
+                    # update distance from current
+                    rooms[new_i][new_j] = rooms[i][j] + 1
+                    # add to queue to explore
+                    queue.append( (new_i, new_j) )
