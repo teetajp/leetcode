@@ -24,17 +24,17 @@ class Solution:
                     queue.append( (i, j+1, 1) )
         
         def isEmptyRoom(i, j):
-            return i >= 0 and i < m and j >= 0 and j < n and 0 < rooms[i][j] <= INF
+            return i >= 0 and i < m and j >= 0 and j < n and rooms[i][j] == INF
         
+        # if a room has been visited earlier than another, it is guaranteed to have
+        # a lower distance due to BFS
         while queue:
             i, j, dist = queue.popleft()
             if not isEmptyRoom(i, j):
-                continue # room out of bound or not empty
+                continue # room out of bound or visited with shorter dist or not empty
             
-            # update min distance from gate if possible
-            if dist < rooms[i][j]:
-                rooms[i][j] = dist
-                queue.append( (i-1, j, dist + 1) )
-                queue.append( (i, j-1, dist + 1) )
-                queue.append( (i+1, j, dist + 1) )
-                queue.append( (i, j+1, dist + 1) )
+            rooms[i][j] = dist
+            queue.append( (i-1, j, dist + 1) )
+            queue.append( (i, j-1, dist + 1) )
+            queue.append( (i+1, j, dist + 1) )
+            queue.append( (i, j+1, dist + 1) )
