@@ -22,10 +22,11 @@ class Solution:
                     queue.append( (i, j) )
         
         def isEmptyRoom(i, j):
+            # check if room is in bounds and is an unupdated empty room
             return i >= 0 and i < m and j >= 0 and j < n and rooms[i][j] == INF
         
-        # if a room has been visited earlier than another, it is guaranteed to have
-        # a lower distance due to BFS
+        # if a room has been visited earlier than another,
+        # then it is guaranteed to have a lower distance due to BFS
         while queue:
             i, j = queue.popleft()
             
