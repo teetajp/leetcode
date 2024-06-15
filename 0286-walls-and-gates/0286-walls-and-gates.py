@@ -13,7 +13,7 @@ class Solution:
         queue = deque() # yet to explore
         
         def addEmptyRoom(i, j, dist):
-            if i >= 0 and i < m and j >= 0 and j < n and rooms[i][j] == INF:
+            if i >= 0 and i < m and j >= 0 and j < n:
                 queue.append( (i, j, dist) )
                 
         # find the gates and add them to the queue to explore outwards
