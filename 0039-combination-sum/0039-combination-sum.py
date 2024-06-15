@@ -17,8 +17,7 @@ class Solution:
                 
                 combinationSumRec(combo, cand_idx + 1, target)
                 
-                
-            if target == 0:
+            elif target == 0:
                 # our combo sums up to target
                 res.append(combo.copy())         
                 
