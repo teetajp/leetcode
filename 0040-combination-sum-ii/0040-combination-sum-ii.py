@@ -15,14 +15,18 @@ class Solution:
                     comboSumRec(combo, cand_idx + 1, target - candidates[cand_idx])
                     combo.pop()
                     
-                # option 2: if skip this num, then must skip that number completely
+                # option 2: if skip this num, then skip all instances of this num
                 while ( cand_idx + 1 < len(candidates) and
                         candidates[cand_idx] == candidates[cand_idx + 1] ):
                     cand_idx += 1 # increment until we see another unique candidate
                 
                 if cand_idx + 1 < len(candidates):
+                    # only if there was another distinct candidate after cur candidate
                     comboSumRec(combo, cand_idx + 1, target)
         
         
         comboSumRec([], 0, target)
         return res
+    
+# Time complexity: O(nlogn + 2^n)
+# Space complexity: O(2^n)
