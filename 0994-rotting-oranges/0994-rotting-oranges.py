@@ -33,9 +33,8 @@ class Solution:
         elapsed = 0
         
         while rotting_q and fresh_set:
-            num_rotting = len(rotting_q)
             
-            for i in range(num_rotting):
+            for i in range(len(rotting_q)):
                 cur_x, cur_y = rotting_q.popleft()
                 
                 for dx, dy in DIRS:
