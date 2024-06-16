@@ -39,11 +39,6 @@ class Solution:
                 for dx, dy in DIRS:
                     new_x, new_y = cur_x + dx, cur_y + dy
                     addRottingOrange(new_x, new_y)
-                    
-                    # break early
-                    if not fresh_set:
-                        return elapsed + 1 if not fresh_set else -1
-                    
                 
             elapsed += 1
             
