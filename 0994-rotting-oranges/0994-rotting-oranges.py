@@ -10,14 +10,6 @@ class Solution:
         DIRS = ((-1, 0), (0, -1), (1, 0), (0, 1))
         # check that all oranges has a path to at least one rotten orange (?)
         
-        def addRottingOrange(i, j):
-            # adds fresh orange to the rotting queue if its in bounds
-            if 0 <= i < m and 0 <= j < n and grid[i][j] == 1 and not visited[i][j]:
-                rotting_q.append( (i, j) )
-                visited[i][j] = True
-                grid[i][j] = 2 # set to rotten
-                fresh_set.discard( (i, j) )
-            
         for i in range(m):
             for j in range(n):
                 # identify fresh and rotten oranges
@@ -27,13 +19,20 @@ class Solution:
                     # add oranges
                     rotting_q.append( (i, j) )
                     visited[i][j] = True
+
                     
-                    
-                    
+        def addRottingOrange(i, j):
+            # adds fresh orange to the rotting queue if its in bounds
+            if 0 <= i < m and 0 <= j < n and grid[i][j] == 1 and not visited[i][j]:
+                rotting_q.append( (i, j) )
+                visited[i][j] = True
+                grid[i][j] = 2 # set to rotten
+                fresh_set.discard( (i, j) )
+            
         elapsed = 0
         
         while rotting_q and fresh_set:
-            
+            # iterate over each orange that just rot this minute
             for i in range(len(rotting_q)):
                 cur_x, cur_y = rotting_q.popleft()
                 
