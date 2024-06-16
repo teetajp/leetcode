@@ -1,7 +1,6 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        # check forward and backward at the same time by a reversed copy of the wor as well
-        # DFS
+        # main algorithm: DFS
         # later: prune search by checking num of remaining letters that can be added
         # idea: memoize current path prefix and store in dict for later use to shorten search
         m, n, k = len(board), len(board[0]), len(word)
@@ -18,7 +17,10 @@ class Solution:
                 return True
             
             visited.add( (i, j) )
-            makes_word = DFS(i-1, j, ltr_idx+1) or DFS(i, j-1, ltr_idx+1) or DFS(i+1, j, ltr_idx+1) or DFS(i, j+1, ltr_idx+1)
+            makes_word = DFS(i-1, j, ltr_idx+1) or \
+                         DFS(i, j-1, ltr_idx+1) or \
+                         DFS(i+1, j, ltr_idx+1) or \
+                         DFS(i, j+1, ltr_idx+1)
             visited.remove( (i, j) ) # backtrack
             
             return makes_word
