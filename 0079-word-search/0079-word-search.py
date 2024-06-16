@@ -34,5 +34,5 @@ class Solution:
                 
         return False
     
-    # Time: O( m*n*k )
-    # Space: O( k ) for visited set
+    # Time: O( m * n * 3^k )
+    # Space: O( k ) for visited set and call stack
