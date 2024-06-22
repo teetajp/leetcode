@@ -1,34 +1,37 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        # Topological Sort
-        # we want to take courses with no prereqs first then the ones with those earlier prereqs
+        # Topological Sort with BFS
         
-        # build adjacency list
+        prereqMap = defaultdict(list)
         
-        prereqMap = defaultdict(list) # key: course_idx, value: indices of courses that key is prereq to
-        eligible_crs = set(i for i in range(numCourses)) # set of courses with no prereqs (or prereqs have been fulfilled)
-        prereqsNeeded = {}
-        
-        for course, prereq in prerequisites:
-            prereqMap[prereq].append(course)
-            eligible_crs.discard(course)
-            prereqsNeeded[course] = prereqsNeeded.get(course, 0) + 1
+        for crs_idx, pre_idx in prerequisites:
+            prereqMap[crs_idx].append(pre_idx)
             
-        
-        if not eligible_crs:
-            return []
-        
         ordering = []
-        while eligible_crs:
-            crs = eligible_crs.pop()
-            ordering.append(crs)
-            
-            while prereqMap[crs]:
-                sequel_crs = prereqMap[crs].pop()
-                prereqsNeeded[sequel_crs] -= 1
-                
-                if prereqsNeeded[sequel_crs] == 0:
-                    del prereqsNeeded[sequel_crs]
-                    eligible_crs.add(sequel_crs)
+        visited = set() # courses we have added to ordering
+        self.hasCycle = False
         
-        return ordering if len(prereqsNeeded) == 0 else []
+        def DFS(visited, path, crs):
+            if crs in visited:
+                # already added to ordering, so ignore
+                return
+            if crs in path:
+                # course is in current chain of prereqs
+                raise Exception("Cycle Detected")
+                
+            path.add(crs)
+            while prereqMap[crs]:
+                prereq = prereqMap[crs].pop()
+                DFS(visited, path, prereq)
+                
+            path.remove(crs)
+            ordering.append(crs)
+            visited.add(crs)
+        
+        try:
+            for crs in range(numCourses):
+                DFS(visited, set(), crs)
+        except: # cycle detected
+            return [] 
+        
+        return ordering
