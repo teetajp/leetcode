@@ -23,8 +23,7 @@ class Solution:
             
             # add cloned neighbors by recursing on them
             for orgNeighbor in orgNode.neighbors:
-                clonedNeighbor = clonedNodes.get(orgNeighbor.val, None) or \
-                                 cloneNode(orgNeighbor, clonedNodes)
+                clonedNeighbor = cloneNode(orgNeighbor, clonedNodes)
                 # TODO: check clone graph instead
                 copyNode.neighbors.append(clonedNeighbor)
             
