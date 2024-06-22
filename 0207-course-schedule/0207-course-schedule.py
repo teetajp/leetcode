@@ -11,10 +11,10 @@ class Solution:
         for course, prereq_course in prerequisites:
             prereqs[course].add(prereq_course)
         
-        has_searched = set()
+        has_searched = [False] * numCourses
         
         def has_cycle(visited, course_idx):
-            if course_idx in has_searched:
+            if has_searched[course_idx]:
                 return False
             if course_idx in visited:
                 return True
@@ -26,7 +26,11 @@ class Solution:
                     return True
                 
             visited.remove(course_idx)
-            has_searched.add(course_idx)
+            has_searched[course_idx] = True
             return False
         
-        return not any(has_cycle(set(), i) for i in range(numCourses))
+        for i in range(numCourses):
+            if has_cycle(set(), i):
+                return False
+            
+        return True
