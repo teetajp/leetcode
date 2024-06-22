@@ -1,6 +1,10 @@
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
-        """Union-find with edge removal"""
+        """
+        Brute force: DFS after every insert to determine if number of nodes in CC remained the same --> O(n^2) time, O(n) space
+        Efficient: Union-find after every insert to see if the two endpoints are already connected before insertion --> O(n*invAck(n)) time, O(n) space
+        
+        """
         n = len(edges)
         parent = [i for i in range(n+1)]
         rank = [1] * (n+1)
