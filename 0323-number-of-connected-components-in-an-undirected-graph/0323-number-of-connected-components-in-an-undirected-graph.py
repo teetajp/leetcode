@@ -8,28 +8,27 @@ class Solution:
         - can do union find or DFS
         """
         
-        adjList = defaultdict(list) 
-    
-        for nodeA, nodeB in edges:                
-            adjList[nodeA].append(nodeB)
-            adjList[nodeB].append(nodeA)
-        
-        numComponents = n - len(adjList) # number of single-node connected components (that has no edges)
-        
-        def deleteNodesDFS(node):
-            while adjList[node]:
-                neighbor = adjList[node].pop()
-                if neighbor in adjList:
-                    deleteNodesDFS(neighbor)
-            del adjList[node]
-            
-        for node in range(n):
-            if node in adjList:
-                numComponents += 1
-                deleteNodesDFS(node)
+        parent = list(range(n))
+
+        def find(x):
+            while parent[x] != x:
+                x = parent[x]
+            return x
+
+        def union(x, y):
+            rootX = find(x)
+            rootY = find(y)
+            if rootX != rootY:
+                parent[rootY] = rootX
+
+        for a, b in edges:
+            union(a, b)
+
+        # Count the number of unique roots
+        numComponents = len(set(find(i) for i in range(n)))
         
         return numComponents
-    
+
     
     # runtime: O(E + V)
     # space: O(E + V)
