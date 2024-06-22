@@ -6,10 +6,10 @@ class Solution:
         # ==> topSort then DFS?
         
         # each node should not be able to reach itself
-        prereqs = defaultdict(set)
+        prereqs = defaultdict(list)
         
         for course, prereq_course in prerequisites:
-            prereqs[course].add(prereq_course)
+            prereqs[course].append(prereq_course)
         
         has_searched = [False] * numCourses
         
