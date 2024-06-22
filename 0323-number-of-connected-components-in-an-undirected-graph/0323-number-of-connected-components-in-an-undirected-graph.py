@@ -34,5 +34,5 @@ class Solution:
         # count the number of connected components by checking for nodes with no outgoing edge
         return sum(parent[i] == i for i in range(n))
     
-# Time Complexity: O(n + e + ackermann(n))
+# Time Complexity: O(n + |E| * ackermann(n))
 # Space Complexity: O(n)
