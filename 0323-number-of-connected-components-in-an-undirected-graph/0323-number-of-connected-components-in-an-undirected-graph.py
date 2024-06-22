@@ -28,3 +28,7 @@ class Solution:
                 deleteNodesDFS(node)
         
         return numComponents
+    
+    
+    # runtime: O(E + V)
+    # space: O(E + V)
