@@ -21,7 +21,8 @@ class Solution:
             
             visited.add(course_idx)
             
-            for prereq_idx in prereqs[course_idx]:
+            while prereqs[course_idx]:
+                prereq_idx = prereqs[course_idx].pop()
                 if has_cycle(visited, prereq_idx):
                     return True
                 
