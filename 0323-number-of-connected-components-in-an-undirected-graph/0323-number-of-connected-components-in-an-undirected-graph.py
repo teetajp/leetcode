@@ -19,13 +19,9 @@ class Solution:
                 return # same parent, do nothing
             
             # union by rank
-            if rank[parent1] >= rank[parent2]:
-                rank[parent1] += rank[parent2]
-                parent[parent2] = parent1
-            else:
-                rank[parent2] += rank[parent1]
-                parent[parent1] = parent2
-            
+            p_smaller, p_larger = sorted([parent1, parent2], key=lambda x: rank[x])
+            rank[p_larger] += rank[p_smaller]
+            parent[p_smaller] = p_larger
             
         
         for a, b in edges:
