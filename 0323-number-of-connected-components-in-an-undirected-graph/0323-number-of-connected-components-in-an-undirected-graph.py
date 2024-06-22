@@ -7,7 +7,7 @@ class Solution:
         def find(node):
             """Find the parent of the set"""
             while node != parent[node]:
-                parent[node] = parent[parent[node]] # compress path; XXX: what about rank?
+                parent[node] = parent[parent[node]] # compress path
                 node = parent[node]
             return node
             
@@ -33,3 +33,6 @@ class Solution:
         
         # count the number of connected components by checking for nodes with no outgoing edge
         return sum(parent[i] == i for i in range(n))
+    
+# Time Complexity: O(n + e + ackermann(n))
+# Space Complexity: O(n)
