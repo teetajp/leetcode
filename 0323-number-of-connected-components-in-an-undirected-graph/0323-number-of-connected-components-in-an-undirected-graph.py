@@ -17,6 +17,9 @@ class Solution:
         numComponents = n - len(adjList) # number of single-node connected components (that has no edges)
         
         def deleteNodesDFS(node):
+            if node not in adjList:
+                return
+            
             while adjList[node]:
                 neighbor = adjList[node].pop()
                 deleteNodesDFS(neighbor)
