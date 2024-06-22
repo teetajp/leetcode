@@ -34,7 +34,7 @@ class Solution:
             return False
         
         for i in range(numCourses):
-            if has_cycle(set(), i):
+            if (not has_searched[i]) and has_cycle(set(), i):
                 return False
             if remaining == 0:
                 return True
