@@ -29,7 +29,7 @@ class Solution:
         # run DFS and return False if we encounter other nodes we have seen before
         # also return False if there are still edges at the end of the function
         def DFS(path, cur_idx):
-            if cur_idx in path or cur_idx not in adjList:
+            if cur_idx in path:
                 return False # cycle exists, not a valid tree
             
             while adjList[cur_idx]:
@@ -43,8 +43,6 @@ class Solution:
                 
             del adjList[cur_idx]
             return True
-                
-            
                 
         # check if each node visited once and no nodes/edges remain
         return DFS(set(), 0) and len(adjList) == 0
