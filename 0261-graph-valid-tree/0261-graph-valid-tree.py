@@ -28,17 +28,17 @@ class Solution:
         
         # run DFS and return False if we encounter other nodes we have seen before
         # also return False if there are still edges at the end of the function
-        def DFS(path, cur_idx):
-            if cur_idx in path:
+        def DFS(visited, cur_idx):
+            if cur_idx in visited:
                 return False # cycle exists, not a valid tree
             
             while adjList[cur_idx]:
                 neighbor = adjList[cur_idx].pop()
                 adjList[neighbor].remove(cur_idx)
                 
-                path.add(cur_idx)
+                visited.add(cur_idx)
                 
-                if not DFS(path, neighbor):
+                if not DFS(visited, neighbor):
                     return False
                 
             del adjList[cur_idx]
