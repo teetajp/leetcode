@@ -19,6 +19,8 @@ class Solution:
                 return False
             if course_idx in visited:
                 return True
+            if len(prereqs[course_idx]) == 0:
+                return False
             
             visited.add(course_idx)
             
