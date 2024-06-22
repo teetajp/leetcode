@@ -12,15 +12,12 @@ class Solution:
             prereqs[course].append(prereq_course)
         
         has_searched = [False] * numCourses
-        remaining = numCourses
         
         def has_cycle(visited, course_idx):
             if has_searched[course_idx]:
                 return False
             if course_idx in visited:
                 return True
-            if len(prereqs[course_idx]) == 0:
-                return False
             
             visited.add(course_idx)
             
@@ -31,14 +28,10 @@ class Solution:
                 
             visited.remove(course_idx)
             has_searched[course_idx] = True
-            nonlocal remaining
-            remaining -= 1
             return False
         
         for i in range(numCourses):
-            if (not has_searched[i]) and has_cycle(set(), i):
+            if has_cycle(set(), i):
                 return False
-            if remaining == 0:
-                return True
             
         return True
