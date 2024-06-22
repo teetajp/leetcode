@@ -20,10 +20,13 @@ class Solution:
                 return True
             
             visited.add(course_idx)
-            res = any(has_cycle(visited, prereq_idx) for prereq_idx in prereqs[course_idx])
+            
+            for prereq_idx in prereqs[course_idx]:
+                if has_cycle(visited, prereq_idx):
+                    return True
+                
             visited.remove(course_idx)
-            if not res:
-                has_searched.add(course_idx)
-            return res
+            has_searched.add(course_idx)
+            return False
         
         return not any(has_cycle(set(), i) for i in range(numCourses))
