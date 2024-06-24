@@ -22,9 +22,9 @@ class Solution:
         Final answer: CS(0)
         """
         cs = [0] * (n+1) # initialize
-        if n >= 1:
+        if n >= 1: # base case
             cs[n-1] = 1
-        if n >= 2:
+        if n >= 2: # base case
             cs[n-2] = 2
         
         for i in range(n-3, -1, -1):
