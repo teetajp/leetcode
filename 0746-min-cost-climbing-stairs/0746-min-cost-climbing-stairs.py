@@ -1,12 +1,28 @@
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
-        # Let minCost[i] be the cost of climbing the stairs from the ith step till the top of stairs
-        # Our recursive formula is defined as:
-        #   minCost[i] = cost[i] + min(minCost[i+1], minCost[i+2])                     if i < len(cost)
-        #   minCost[i] = 0                                                             if i >= len(cost)
-        minCost = [0 for i in range(len(cost) + 2)] # 2 placeholder value to represent when i >= len(cost) - 1
+        """
+        Let n = len(cost) >= 2be the top floor.
+        Let MC[i] be the minimum cost of climbing from the i-th step to the n-th step/floor.
         
-        for i in range(len(cost)-1, -1, -1):
-            minCost[i] = cost[i] + min(minCost[i+1], minCost[i+2])
+        Final answer: min(MC[0], MC[1])
         
-        return min(minCost[0], minCost[1])
+        Base Case:
+        - MC[n] := 0
+        - MC[n-1] := cost[n-1]
+        - MC[n-2] := cost[n-2]
+        
+        Recursive Case:
+        - For 0 <= i <= n-3,
+            MC[i] := cost[i] + min(MC[i+1], MC[i+2])
+        
+        Order:
+        - fill linearly from MC[n] down to MC[0]
+        """
+        n = len(cost)
+        MC = [0] * n # [0, 1, ..., n-2, n-1]
+        MC[n-1], MC[n-2] = cost[n-1], cost[n-2]
+        
+        for i in reversed(range(n-2)): # n-3 down to 0
+            MC[i] = cost[i] + min(MC[i+1], MC[i+2])
+        
+        return min(MC[0], MC[1])
