@@ -25,8 +25,10 @@ class Solution:
         - iterate i from n down to 0
             - iterate j = 0 before j = 1
             
-        # Time: O(n) for array with 2n values
-        # Space: O(n) for array with 2n values
+        # Time: O(n)
+        # Space: O(n)
+        
+        # optimization: reuse `nums` instead of adding it again
         """
         n = len(nums)
         MM = [ [0] * n, nums ]
