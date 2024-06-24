@@ -28,19 +28,14 @@ class Solution:
         # Time: O(n)
         # Space: O(n)
         
-        # optimization: reuse `nums` instead of adding it again
+        Optimization:
+        - reuse `nums` instead of adding it again
+        - pop rewards from `nums` to shrink space instead of just calling it
         """
-        # n = len(nums)
-        # MM = [ [0] * n, nums ]
         
         MM_skip, MM_rob = 0, nums.pop()
-        
-#         for i in reversed(range(n-1)):
-#             MM[0][i] = max(MM[0][i+1], MM[1][i+1])
-#             MM[1][i] += MM[0][i+1]
             
         while nums:
             MM_skip, MM_rob = max(MM_skip, MM_rob), nums.pop() + MM_skip
 
         return max(MM_skip, MM_rob)
-        # return max(MM[1][0], MM[0][0])
