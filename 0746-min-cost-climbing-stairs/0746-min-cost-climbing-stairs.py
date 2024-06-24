@@ -26,3 +26,7 @@ class Solution:
             MC[i] = cost[i] + min(MC[i+1], MC[i+2])
         
         return min(MC[0], MC[1])
+    
+    
+    # Time: O(n)
+    # Space: O(n)
