@@ -31,6 +31,9 @@ class Solution:
         Optimization:
         - reuse `nums` instead of adding it again
         - pop rewards from `nums` to shrink space instead of just calling it
+        
+        Optimized Time: O(n)
+        Optimized Space: O(1)
         """
         
         MM_skip, MM_rob = 0, nums.pop()
