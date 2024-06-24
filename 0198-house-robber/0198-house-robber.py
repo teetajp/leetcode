@@ -1,27 +1,43 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        # Let n be the number of houses you can rob
-        # Let maxLoot(i, j) represent the maximum amount of money you can rob from nums[i...n], given that you choose to rob the house where j is a boolean representing when we have chosen to rob the house (so if j=False, we can rob or not rob the house)
+        """
+        Unlike a different LC problem (can't recall),
+        the street is not circular here,
+        so we can start at either ends of the street.
         
-        # Recursively we define maxLoot as:
-        #   maxLoot(i, 1) = nums[i] + maxLoot(i+2, 0) # since we rob house i, skip house i+1, and look at i+2
-        #   maxLoot(i) = 0 when i < 0 or i >= n
+        Start at house 1 or 2 (may need two passes).
         
-        # We want to compute maxLoot(0, 0)
-        # We have to fill the array from with i <- n down to 0 to satisfy the dependencies
-        # Also compute j=1 first before j=0
+        We use 0-based indexing to implement, so house 1 is index 0.
         
-#         n = len(nums)
-#         maxLoot = [[0 for i in range(n + 2)] for j in range(2)]
-#         for i in range(n-1, -1, -1):
-#             maxLoot[1][i] = nums[i] + maxLoot[0][i+2]
-#             maxLoot[0][i] = max( maxLoot[1][i], maxLoot[1][i+1] )      
-                
-#         return maxLoot[0][0]
-#         # O(n) time to fill the DP array, O(2n) space for DP memoization array
-    
-        maxLoot = [0, 0] # first index stores the max loot from the i-2th iteration, and second index stores current iteration's max loot
-        for i in range(len(nums)):
-            maxLoot[0], maxLoot[1] = maxLoot[1], max(maxLoot[1], nums[i] + maxLoot[0])
-        return maxLoot[1]
+        Let n be the number of houses along the street minus 1.
+        Let MM[i, j] be the maximum amount of money earnable starting from the i-th house up until the n-th house/end of the street if we rob (j=1) / skip (j=0) this house.
+        
+        Final answer: max(MM[0, 0], MM[0, 1])
+        
+        Base Case:
+        - MM[n, 1] := nums[n]
+        - MM[n, 0] := 0
+
+        Recursive Case:
+        - For 0 <= i <= n-1,
+            MM[i, 0] := max(MM[i+1, 0], MM[i+1, 1]) # can rob or skip next house
+            MM[i, 1] := nums[i] + MM[i+1, 0] # can't rob next house
             
+        # XXX: can optimize this and make it 1D?
+        
+        Fill Order:
+        - iterate i from n down to 0
+            - iterate j = 0 before j = 1
+            
+        # Time: O(n) for array with 2n values
+        # Space: O(n) for array with 2n values
+        """
+        n = len(nums)
+        MM = [ [0 for _ in range(2)] for _ in range(n) ]
+        MM[-1][1] = nums[-1]
+        
+        for i in reversed(range(n-1)):
+            MM[i][0] = max(MM[i+1][0], MM[i+1][1])
+            MM[i][1] = nums[i] + MM[i+1][0]
+            
+        return max(MM[0][0], MM[0][1])
