@@ -29,11 +29,10 @@ class Solution:
         => Space: O(1)
         """
         n = len(cost)
-        MC = [cost[n-2], cost[n-1]] # initialize MC[n-2] and MC[n-1]
+        MC_i1, MC_i2 = cost[n-2], cost[n-1] # initialize MC[n-2] and MC[n-1]
         
         for i in reversed(range(n-2)): # n-3 down to 0
             # calculate new MC[i] and set the prev MC[i+1] to MC[i+2]
-            MC_i = cost[i] + min(MC[0], MC[1])
-            MC[0], MC[1] = MC_i, MC[0]
+            MC_i1, MC_i2 = cost[i] + min(MC_i1, MC_i2), MC_i1
         
-        return min(MC[0], MC[1])
+        return min(MC_i1, MC_i2)
