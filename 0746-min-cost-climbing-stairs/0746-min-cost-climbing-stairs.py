@@ -1,7 +1,7 @@
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
         """
-        Let n = len(cost) >= 2be the top floor.
+        Let n = len(cost) >= 2 be the top floor.
         Let MC[i] be the minimum cost of climbing from the i-th step to the n-th step/floor.
         
         Final answer: min(MC[0], MC[1])
