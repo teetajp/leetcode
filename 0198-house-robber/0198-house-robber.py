@@ -1,10 +1,6 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
         """
-        Unlike a different LC problem (can't recall),
-        the street is not circular here,
-        so we can start at either ends of the street.
-        
         Start at house 1 or 2 (may need two passes).
         
         We use 0-based indexing to implement, so house 1 is index 0.
@@ -33,11 +29,10 @@ class Solution:
         # Space: O(n) for array with 2n values
         """
         n = len(nums)
-        MM = [ [0 for _ in range(2)] for _ in range(n) ]
-        MM[-1][1] = nums[-1]
+        MM = [ [0] * n, nums ]
         
         for i in reversed(range(n-1)):
-            MM[i][0] = max(MM[i+1][0], MM[i+1][1])
-            MM[i][1] = nums[i] + MM[i+1][0]
+            MM[0][i] = max(MM[0][i+1], MM[1][i+1])
+            MM[1][i] += MM[0][i+1]
             
-        return max(MM[0][0], MM[0][1])
+        return max(MM[1][0], MM[0][0])
