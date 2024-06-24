@@ -31,7 +31,7 @@ class Solution:
         n = len(cost)
         MC_i1, MC_i2 = cost[n-2], cost[n-1] # initialize MC[n-2] and MC[n-1]
         
-        for i in reversed(range(n-2)): # n-3 down to 0
+        for i in range(n-3, -1, -1): # n-3 down to 0
             # calculate new MC[i] and set the prev MC[i+1] to MC[i+2]
             MC_i1, MC_i2 = cost[i] + min(MC_i1, MC_i2), MC_i1
         
