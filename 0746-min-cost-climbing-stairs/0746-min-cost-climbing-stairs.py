@@ -27,10 +27,14 @@ class Solution:
         and overwrite MC[i+1] with MC[i].
         
         => Space: O(1)
+        
+        Since the cost array is ordered, we can pop elements from the right to save space.
         """
         n = len(cost)
+        
+        # initialize MC[n-2] and MC[n-1]
         MC_i2 = cost.pop()
-        MC_i1 = cost.pop() # initialize MC[n-2] and MC[n-1]
+        MC_i1 = cost.pop()
         
         while cost: # n-3 down to 0
             # calculate new MC[i] and set the prev MC[i+1] to MC[i+2]
