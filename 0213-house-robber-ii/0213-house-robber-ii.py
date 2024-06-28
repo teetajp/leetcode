@@ -27,7 +27,6 @@ class Solution:
                 we exclude nums[n-1] from our calculation.
             To calculate MM[0][0], we may include nums[n-1] in our calculations.
         """
-        n = len(nums)
         
         if len(nums) == 1:
             return nums[0]
@@ -37,7 +36,7 @@ class Solution:
         # Second pass: skip first house, rob second house
         MM_skip2, MM_rob2 = max(MM_skip2, MM_rob2), MM_skip2 + MM_rob1
         
-        for i in reversed(range(0, n-2)):
+        for i in reversed(range(0, len(nums))):
             reward = nums.pop()
             
             if i >= 1:
