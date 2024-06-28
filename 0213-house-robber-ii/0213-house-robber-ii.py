@@ -32,18 +32,17 @@ class Solution:
         if len(nums) == 1:
             return nums[0]
         
-        MM_skip, MM_rob = 0, nums.pop()
-        
+        MM_skip2, MM_rob2 = 0, nums.pop()
+        MM_skip1, MM_rob1 = 0, nums.pop()
         # Second pass: skip first house, rob second house
-        for i in reversed(range(1, n-1)):
-            MM_skip, MM_rob = max(MM_skip, MM_rob), MM_skip + nums[i]
+        MM_skip2, MM_rob2 = max(MM_skip2, MM_rob2), MM_skip2 + MM_rob1
         
-        res = max(MM_skip, MM_rob)
+        for i in reversed(range(0, n-2)):
+            reward = nums.pop()
+            
+            if i >= 1:
+                MM_skip2, MM_rob2 = max(MM_skip2, MM_rob2), MM_skip2 + reward
+            
+            MM_skip1, MM_rob1 = max(MM_skip1, MM_rob1), MM_skip1 + reward
         
-        # First pass: rob first house, skip second house
-        MM_skip, MM_rob = 0, nums.pop()
-        
-        while nums:
-           MM_skip, MM_rob = max(MM_skip, MM_rob), MM_skip + nums.pop()
-        
-        return max(res, MM_skip, MM_rob)
+        return max(MM_skip2, MM_rob2, MM_skip1, MM_rob1)
