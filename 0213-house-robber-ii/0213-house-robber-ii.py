@@ -27,23 +27,12 @@ class Solution:
                 we exclude nums[n-1] from our calculation.
             To calculate MM[0][0], we may include nums[n-1] in our calculations.
         """
-        n = len(nums)
-        if n == 1:
-            return nums[0]
+        def rob_rec(start: int, end:int) -> int:
+            MM_skip, MM_rob = 0, nums[end-1]
         
-        MM_skip2, MM_rob2 = 0, nums.pop()
-        MM_skip1, MM_rob1 = 0, nums.pop()
-        MM_skip2, MM_rob2 = max(MM_skip2, MM_rob2), MM_skip2 + MM_rob1
-        
-        n -= 2
-        
-        while nums:
-            reward = nums.pop()
-            n -= 1
+            for i in reversed(range(start, end-1)):
+                MM_skip, MM_rob = max(MM_skip, MM_rob), MM_skip + nums[i]
             
-            if n >= 1:
-                MM_skip2, MM_rob2 = max(MM_skip2, MM_rob2), MM_skip2 + reward
-            
-            MM_skip1, MM_rob1 = max(MM_skip1, MM_rob1), MM_skip1 + reward
+            return max(MM_skip, MM_rob)
         
-        return max(MM_skip2, MM_rob2, MM_skip1, MM_rob1)
+        return max(rob_rec(0, n-1), rob_rec(1, n)) if (n := len(nums)) > 1 else nums[0]
