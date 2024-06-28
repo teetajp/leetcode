@@ -32,7 +32,7 @@ class Solution:
         if n == 1:
             return nums[0]
         
-        MM_skip, MM_rob = 0, nums[-1]
+        MM_skip, MM_rob = 0, nums.pop()
         
         # Second pass: skip first house, rob second house
         for i in reversed(range(1, n-1)):
@@ -41,7 +41,6 @@ class Solution:
         res = max(MM_skip, MM_rob)
         
         # First pass: rob first house, skip second house
-        del nums[-1]
         MM_skip, MM_rob = 0, nums.pop()
         
         while nums:
