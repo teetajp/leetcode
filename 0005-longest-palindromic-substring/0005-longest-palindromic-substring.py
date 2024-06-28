@@ -44,6 +44,8 @@ class Solution:
         res = [0, 1]
         
         for k in range(2, n+1): # check every substring starting from len 2
+            longest_len = res[1] - res[0]
+            
             for i in range(0, n - k + 1): # start index of substring
                 j = i + k # end index (exclusive)
                 
@@ -52,7 +54,7 @@ class Solution:
                     
                 isPLD[i][j] = isPLD[i+1][j-1] and (s[i] == s[j-1])
                 
-                if isPLD[i][j] and j - i >= res[1] - res[0]:
+                if isPLD[i][j] and j - i >= longest_len:
                     res[0], res[1] = i, j
             
         return s[res[0]:res[1]]
