@@ -42,9 +42,9 @@ class Solution:
         
         # First pass: rob first house, skip second house
         del nums[-1]
-        MM_skip, MM_rob = 0, nums[-1]
+        MM_skip, MM_rob = 0, nums.pop()
         
-        for i in reversed(range(0, len(nums)-1)):
-           MM_skip, MM_rob = max(MM_skip, MM_rob), MM_skip + nums[i]
+        while nums:
+           MM_skip, MM_rob = max(MM_skip, MM_rob), MM_skip + nums.pop()
         
         return max(res, MM_skip, MM_rob)
