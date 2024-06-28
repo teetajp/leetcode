@@ -52,7 +52,7 @@ class Solution:
                     
                 isPLD[i][j] = isPLD[i+1][j-1] and (s[i] == s[j-1])
                 
-                if isPLD[i][j] and j - i + 1 >= res[1] - res[0] + 1:
+                if isPLD[i][j] and j - i >= res[1] - res[0]:
                     res[0], res[1] = i, j
             
         return s[res[0]:res[1]]
