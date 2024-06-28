@@ -27,19 +27,21 @@ class Solution:
                 we exclude nums[n-1] from our calculation.
             To calculate MM[0][0], we may include nums[n-1] in our calculations.
         """
-        
-        if len(nums) == 1:
+        n = len(nums)
+        if n == 1:
             return nums[0]
         
         MM_skip2, MM_rob2 = 0, nums.pop()
         MM_skip1, MM_rob1 = 0, nums.pop()
-        # Second pass: skip first house, rob second house
         MM_skip2, MM_rob2 = max(MM_skip2, MM_rob2), MM_skip2 + MM_rob1
         
-        for i in reversed(range(0, len(nums))):
+        n -= 2
+        
+        while nums:
             reward = nums.pop()
+            n -= 1
             
-            if i >= 1:
+            if n >= 1:
                 MM_skip2, MM_rob2 = max(MM_skip2, MM_rob2), MM_skip2 + reward
             
             MM_skip1, MM_rob1 = max(MM_skip1, MM_rob1), MM_skip1 + reward
