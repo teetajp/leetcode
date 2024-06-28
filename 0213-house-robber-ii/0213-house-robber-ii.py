@@ -41,15 +41,10 @@ class Solution:
         res = max(MM_skip, MM_rob)
         
         # First pass: rob first house, skip second house
-        MM = [[0] * n, nums]
-        MM[1][-1] = 0
+        del nums[-1]
+        MM_skip, MM_rob = 0, nums[-1]
         
-        for i in reversed(range(0, n-1)):
-            # skip this house
-            MM[0][i] = max(MM[0][i+1], MM[1][i+1])
-                          
-            # rob this house
-            MM[1][i] += MM[0][i+1]
+        for i in reversed(range(0, len(nums)-1)):
+           MM_skip, MM_rob = max(MM_skip, MM_rob), MM_skip + nums[i]
         
-        
-        return max(res, MM[0][0], MM[1][0])
+        return max(res, MM_skip, MM_rob)
