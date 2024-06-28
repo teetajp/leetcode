@@ -32,17 +32,13 @@ class Solution:
         if n == 1:
             return nums[0]
         
-        MM = [[0] * n, nums.copy()]
+        MM_skip, MM_rob = 0, nums[-1]
         
         # Second pass: skip first house, rob second house
         for i in reversed(range(1, n-1)):
-            # skip this house
-            MM[0][i] = max(MM[0][i+1], MM[1][i+1])
-                          
-            # rob this house
-            MM[1][i] += MM[0][i+1]
+            MM_skip, MM_rob = max(MM_skip, MM_rob), MM_skip + nums[i]
         
-        res = max(MM[0][1], MM[1][1])
+        res = max(MM_skip, MM_rob)
         
         # First pass: rob first house, skip second house
         MM = [[0] * n, nums]
