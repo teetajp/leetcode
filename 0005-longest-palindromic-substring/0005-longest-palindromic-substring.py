@@ -50,7 +50,6 @@ class Solution:
                 if isPLD[i][j]:
                     continue
                     
-                
                 isPLD[i][j] = isPLD[i+1][j-1] and (s[i] == s[j-1])
                 
                 if isPLD[i][j] and j - i + 1 >= res[1] - res[0] + 1:
