@@ -42,7 +42,6 @@ class Solution:
             # rob this house
             MM[1][i] += MM[0][i+1]
         
-        print(MM)
         res = max(MM[0][1], MM[1][1])
         
         # First pass: rob first house, skip second house
