@@ -35,7 +35,7 @@ class Solution:
         MM = [[0] * n, nums.copy()]
         
         # Second pass: skip first house, rob second house
-        for i in reversed(range(0, n-1)):
+        for i in reversed(range(1, n-1)):
             # skip this house
             MM[0][i] = max(MM[0][i+1], MM[1][i+1])
                           
