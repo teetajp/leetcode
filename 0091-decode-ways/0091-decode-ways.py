@@ -69,5 +69,4 @@ class Solution:
         for i in reversed(range(n-2)):
             DP[i] = isValid(s[i]) * DP[i+1] + isValid(s[i:i+2]) * DP[i+2]
         
-        print(DP)
         return DP[0]
