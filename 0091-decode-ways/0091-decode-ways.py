@@ -64,10 +64,10 @@ class Solution:
         if n < 2:
             return DP[n-1]
         
-        DP[n-2] = isValid(s[n-2]) * (DP[n-1] + isValid(s[n-2:]))
+        DP[n-2] = isValid(s[n-2]) * DP[n-1] + isValid(s[n-2:])
         
         for i in reversed(range(n-2)):
-            DP[i] = isValid(s[i]) * (DP[i+1] + isValid(s[i:i+2]) * DP[i+2])
+            DP[i] = isValid(s[i]) * DP[i+1] + isValid(s[i:i+2]) * DP[i+2]
         
         print(DP)
         return DP[0]
