@@ -22,7 +22,9 @@ class Solution:
         
         while hand:
             card = hand.pop()
-                
+            
+            if groups and card < prevCard - 1:
+                return False
             # try to find a spot for the card
             for grp in groups:
                 if grp[-1] == card + 1:
@@ -35,5 +37,5 @@ class Solution:
                 groups.append([card])
                 
             prevCard = card
-            
+
         return len(groups) == 0
