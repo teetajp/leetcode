@@ -10,14 +10,6 @@ class Solution:
         Base Case:
             We can make 0 amount of money with 0 coins, so CC[0] := 0
             For each given denomination i, there exists a coin of that amount, so CC[i] := 1
-        
-        Recursive Case:
-            CC[i] = two pointers?
-            
-            
-        ------
-        Start from largest to smallest, and cache results. ==> this ensures we use the fewest number of coins
-        Skip if CC already exists.
         """
         coins.sort() # sort coin denominations in ascending order
         CC = [float("inf")] * (amount + 1) # initialize DP array
@@ -26,11 +18,11 @@ class Solution:
         CC[0] = 0
         
         while coins and coins[-1] > amount:
+            # remove denominations that are invalid
             del coins[-1]
         
         # Generate all combinations possible, caching intermediate results
         for subamt in range(1, amount+1):
-            
             for c in coins:
                 diff = subamt - c
 
