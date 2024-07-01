@@ -40,3 +40,6 @@ class Solution:
             prevCard = card
 
         return len(groups) == 0
+    
+# time: O(nlogn + n)
+# space: O(n)
