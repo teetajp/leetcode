@@ -18,16 +18,16 @@ class Solution:
         
         # each individual forms their own singleton group, initially
         parent = [i for i in range(n)]
-        rank = [0 for _ in range(n)]
+        rank = [0] * n
         num_groups = n
         
         ### Union-Find/Disjoint-set data structure
         def find(idx):
             """Find index of parent/root node"""
-            while idx != parent[idx]:
+            if idx != parent[idx]:
                 # this node is not a root of the disjoint set
-                parent[idx] = parent[parent[idx]] # traverse up to parent node while performing path compression
-                return find(parent[idx])
+                # traverse up to parent node while performing path compression
+                parent[idx] = find(parent[idx])
             
             return parent[idx]
         
