@@ -54,10 +54,10 @@ class Solution:
             return True
         ###
         
-        logs.sort()
+        logs.sort(reverse=True)
         
         while logs and num_groups > 1:
-            timestamp, person_a, person_b = heapq.heappop(logs)
+            timestamp, person_a, person_b = logs.pop()
             
             if union(person_a, person_b):
                 num_groups -= 1
