@@ -27,12 +27,12 @@ class Solution:
                 return False
             
             # try to find a spot for the card
-            for grp in groups:
+            for i, grp in enumerate(groups):
                 if grp[-1] == card + 1:
                     grp.append(card)
                     
                     if len(grp) == groupSize:
-                        groups.remove(grp)
+                        del groups[i]
                     break
             else:
                 groups.append([card])
