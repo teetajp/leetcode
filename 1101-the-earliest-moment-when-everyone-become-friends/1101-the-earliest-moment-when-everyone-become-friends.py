@@ -54,7 +54,7 @@ class Solution:
             return True
         ###
         
-        heapq.heapify(logs) # O(n); we use heap to lower the maximum space allocated
+        logs.sort()
         
         while logs and num_groups > 1:
             timestamp, person_a, person_b = heapq.heappop(logs)
