@@ -3,7 +3,6 @@ class Solution:
         nums1, nums2 = Counter(nums1), Counter(nums2)
         res = []
         for k in set(nums1.keys()).intersection(set(nums2.keys())):
-            for _ in range(min(nums1[k], nums2[k])):
-                res.append(k)
+            res.extend([k] * min(nums1[k], nums2[k]))
         
         return res
