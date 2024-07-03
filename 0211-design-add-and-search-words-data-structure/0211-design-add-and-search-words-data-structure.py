@@ -3,9 +3,6 @@ class Trie:
         self.letter = letter
         self.isWord = isWord
         self.children = {} # lowercase only (26 chars)
-
-    def __str__(self):
-        return f"""Node: ({self.letter}, {self.isWord}, {self.children})"""
     
 class WordDictionary:
 
@@ -28,7 +25,6 @@ class WordDictionary:
         n = len(word)
 
         def searchRec(cur: Optional[Trie], idx: int) -> bool:
-            # print(f"search: {cur}, {idx}, {word[idx]}")
             if idx == n:
                 return cur.isWord
             
@@ -40,18 +36,6 @@ class WordDictionary:
                 return searchRec(cur.children[nextChar], idx + 1)
             else:
                 return False
-                
-#             if idx == n-1:
-#                 return cur.isWord
-#             # if nextChar == '.': # wildcard
-#             #     ... ensure at least one word exists
-#             #     return any(searchRec(child, idx + 1) for child in cur.children.values())
-            
-# #             if idx == n-1:
-# #                 return (word[idx] == '.') or cur.isWord
-# #             elif 
-#             else:
-                
     
         return searchRec(self.root, 0)
         
