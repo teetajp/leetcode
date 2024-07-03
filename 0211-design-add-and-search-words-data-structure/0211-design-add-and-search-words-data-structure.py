@@ -24,7 +24,7 @@ class WordDictionary:
     def search(self, word: str) -> bool:
         n = len(word)
         
-        @cache
+        @lru_cache
         def searchRec(cur: Optional[Trie], idx: int) -> bool:
             if idx == n:
                 return cur.isWord
