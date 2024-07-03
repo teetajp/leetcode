@@ -52,7 +52,7 @@ class Solution:
         # traverse
         n = len(s)
         
-        @cache
+        @lru_cache
         def DFS(i, cur):
             # what about not cur?
             # if not cur:
