@@ -1,35 +1,22 @@
 class Trie:
     def __init__(self, isWord = False):
         self.isWord = isWord
-        self.children = [None] * 26
+        self.children = {}
+        # self.children = [None] * 26
     
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         """
         Idea: combine tries and DP?
-        
-        Can break off into a new word if current window is a word of at least length 1
-        
-        If no prefix starting at index 0 form a word, return False
-        
-        [prefix][word] OR [prefix][suffix]
-        
-        Need to memoize suffix (DP starting at index i)
-        
-        
-        if this fails, 0 | 1 | suffix
-        then we can ignore checking this suffix (0 1 | suffix) and check window of next length (0 1 2 | suffix)
-        
+
         DFS on tree (DAG) instead of array DP to save space
         
         Each dict word is at most 20 char; reduces window length.
+        
+        TODO: incorporate max/min word length to exit early?
         """
-        # wordDict = set(wordDict)
         ASCII_a = ord('a')
         
-        # build Trie with all dictionary words
-        
-        # TODO: incorporate max/min word length to exit early?
         root = Trie()
         while wordDict:
             word = wordDict.pop()
@@ -39,7 +26,7 @@ class Solution:
             for c in word:
                 idx = ord(c) - ASCII_a
                 
-                if not cur.children[idx]:
+                if idx not in cur.children:
                     cur.children[idx] = Trie()
                 cur = cur.children[idx]
                 
@@ -60,6 +47,7 @@ class Solution:
                 return True
             else:
                 # otherwise, try extending the current path to see if it forms a word
-                return DFS(i+1, cur.children[ord(s[i]) - ASCII_a])
+                idx = ord(s[i]) - ASCII_a
+                return idx in cur.children and DFS(i+1, cur.children[idx])
         
         return DFS(0, root)
