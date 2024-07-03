@@ -14,19 +14,14 @@ class Solution:
         
         Then we can bruteforce all (2^3 = 8) combinations of the values to pop
         """
-        # nums.sort()
-        # print(nums)
         
         minElems = heapq.nsmallest(4, nums)
         maxElems = heapq.nlargest(4, nums)
-        # bruteforce all 2^3 choices
-        # res = nums[-1] - nums[0]
-        # for i in range(0, 4):
-        #     l, r = nums[i], nums[-4+i]
-        #     res = min(res, r - l)
-        res = maxElems[0] - minElems[0]
         
-        for i in range(0, 4):
-            res = min(res, maxElems[-1-i] - minElems[i])
+        # bruteforce all 2^3 choices
+#         res = maxElems[0] - minElems[0]
+        
+#         for i in range(0, 4):
+#             res = min(res, maxElems[-1-i] - minElems[i])
             
-        return res
+        return min(maxElems[-1-i] - minElems[i] for i in range(0, 4))
