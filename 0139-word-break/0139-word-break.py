@@ -35,7 +35,7 @@ class Solution:
         # traverse
         n = len(s)
         
-        @lru_cache
+        @cache
         def DFS(i, cur):
             if not cur:
                 return False
