@@ -1,8 +1,9 @@
+import heapq
+
 class Solution:
     def minDifference(self, nums: List[int]) -> int:
-        n = len(nums)
         
-        if n <= 4:
+        if len(nums) <= 4:
             # can change up to 3 vals, and n == 4, then the only elem is both min and max
             return 0
         
@@ -13,35 +14,19 @@ class Solution:
         
         Then we can bruteforce all (2^3 = 8) combinations of the values to pop
         """
-#         minHeap = []
-#         maxHeap = []
+        # nums.sort()
+        print(nums)
         
-#         # find top/bottom 4 vals and discard the rest
-#         while nums:
-#             i = nums.pop()
-            
-#             if len(minHeap) < 4:
-#                 heapq.heappush(minHeap, i)
-#                 continue
-#             elif i < minHeap[0]:
-#                 # found new min when heap is full
-#                 heapq.heapreplace(minHeap, i)
-#                 continue
-            
-#             if len(maxHeap) < 4:
-#                 heapq.heappush(maxHeap, -i)
-#                 continue
-#             elif -i < maxHeap[0]:
-#                 # found new max when heap is full
-#                 heapq.heapreplace(maxHeap, -i)
-#                 continue
-
-        nums.sort()
-        
+        minElems = heapq.nsmallest(4, nums)
+        maxElems = heapq.nlargest(4, nums)
         # bruteforce all 2^3 choices
-        res = nums[-1] - nums[0]
+        # res = nums[-1] - nums[0]
+        # for i in range(0, 4):
+        #     l, r = nums[i], nums[-4+i]
+        #     res = min(res, r - l)
+        res = maxElems[0] - minElems[0]
+        
         for i in range(0, 4):
-            l, r = nums[i], nums[-4+i]
-            res = min(res, r - l)
+            res = min(res, maxElems[-1-i] - minElems[i])
             
         return res
