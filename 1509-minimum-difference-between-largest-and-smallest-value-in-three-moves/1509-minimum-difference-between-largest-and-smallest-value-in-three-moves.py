@@ -34,7 +34,8 @@ class Solution:
                 heapq.heappushpop(maxElems, i)
         
         # bruteforce all 2^3 choices
-        minElems = [-i for i in minElems]
+        for i in range(len(minElems)):
+            minElems[i] *= -1
         heapq.heapify(minElems)
         heapq.heapify(maxElems)
             
