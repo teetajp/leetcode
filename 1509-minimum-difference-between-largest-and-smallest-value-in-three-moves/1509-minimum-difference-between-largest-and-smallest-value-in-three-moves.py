@@ -19,8 +19,30 @@ class Solution:
         Space: O(1) disregarding `nums` input array (to further optimize, pop nums while updating heap)
         """
         
-        minElems = heapq.nsmallest(4, nums)
-        maxElems = heapq.nlargest(4, nums)
+        # minElems = heapq.nsmallest(4, nums)
+        # maxElems = heapq.nlargest(4, nums)
+        minElems = []
+        maxElems = []
+        while nums:
+            i = nums.pop()
+            
+            if len(minElems) < 4:
+                heapq.heappush(minElems, -i)
+            elif i < -minElems[0]:
+                heapq.heappushpop(minElems, -i)
+            
+            if len(maxElems) < 4:
+                heapq.heappush(maxElems, i)
+            elif i > maxElems[0]:
+                heapq.heappushpop(maxElems, i)
         
         # bruteforce all 2^3 choices
-        return min(maxElems[-1-i] - minElems[i] for i in range(0, 4))
+        minElems = [-i for i in minElems]
+        heapq.heapify(minElems)
+        heapq.heapify(maxElems)
+        res = float("inf")
+        print(maxElems, minElems)
+        while maxElems and minElems:
+            res = min(res, heapq.heappop(maxElems) - heapq.heappop(minElems))
+            
+        return res
