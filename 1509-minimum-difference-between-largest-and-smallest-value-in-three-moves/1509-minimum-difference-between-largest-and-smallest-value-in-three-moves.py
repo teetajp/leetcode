@@ -37,9 +37,5 @@ class Solution:
         minElems = [-i for i in minElems]
         heapq.heapify(minElems)
         heapq.heapify(maxElems)
-        res = float("inf")
-
-        while maxElems and minElems:
-            res = min(res, heapq.heappop(maxElems) - heapq.heappop(minElems))
             
-        return res
+        return min(heapq.heappop(maxElems) - heapq.heappop(minElems) for _ in range(4))
