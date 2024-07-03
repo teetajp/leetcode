@@ -16,7 +16,7 @@ class Solution:
         Then we can bruteforce all (2^3 = 8) combinations of the values to pop
         
         Time: O(n)
-        Space: O(1)
+        Space: O(1) disregarding `nums` input array (to further optimize, pop nums while updating heap)
         """
         
         minElems = heapq.nsmallest(4, nums)
