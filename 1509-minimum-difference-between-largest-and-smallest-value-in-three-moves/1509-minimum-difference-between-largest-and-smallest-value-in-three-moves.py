@@ -37,13 +37,11 @@ class Solution:
 #                 continue
 
         nums.sort()
-        print(nums)
         
         # bruteforce all 2^3 choices
         res = nums[-1] - nums[0]
         for i in range(0, 4):
             l, r = nums[i], nums[-4+i]
-            print(r, l)
             res = min(res, r - l)
-        # [0, 1, 5, 10, 14]
+            
         return res
