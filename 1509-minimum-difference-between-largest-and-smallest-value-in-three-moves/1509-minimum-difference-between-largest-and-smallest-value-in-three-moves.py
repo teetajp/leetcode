@@ -15,7 +15,7 @@ class Solution:
         Then we can bruteforce all (2^3 = 8) combinations of the values to pop
         """
         # nums.sort()
-        print(nums)
+        # print(nums)
         
         minElems = heapq.nsmallest(4, nums)
         maxElems = heapq.nlargest(4, nums)
