@@ -1,7 +1,8 @@
 class Trie:
     def __init__(self, isWord = False):
         self.isWord = isWord
-        self.children = [None] * 26
+        # self.children = [None] * 26
+        self.children = {}
     
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
@@ -43,7 +44,7 @@ class Solution:
             for c in word:
                 idx = ord(c) - ASCII_a
                 
-                if not cur.children[idx]:
+                if idx not in cur.children:
                     cur.children[idx] = Trie()
                 cur = cur.children[idx]
                 
@@ -66,6 +67,6 @@ class Solution:
             idx = ord(s[i]) - ASCII_a
             # if current path forms a word, try separating it and forming a new word
             # otherwise, try extending the current path to see if it forms a word
-            return (cur.isWord and DFS(i, root)) or DFS(i+1, cur.children[idx])
+            return (cur.isWord and DFS(i, root)) or DFS(i+1, cur.children.get(idx, None))
         
         return DFS(0, root)
