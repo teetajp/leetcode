@@ -31,7 +31,9 @@ class Solution:
         
         # TODO: incorporate max/min word length to exit early?
         root = Trie()
-        for word in wordDict:
+        while wordDict:
+            word = wordDict.pop()
+
             cur = root
             
             for c in word:
