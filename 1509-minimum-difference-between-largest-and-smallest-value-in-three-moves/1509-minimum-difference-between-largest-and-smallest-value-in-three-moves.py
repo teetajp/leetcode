@@ -33,10 +33,12 @@ class Solution:
             elif i > maxElems[0]:
                 heapq.heappushpop(maxElems, i)
         
-        # bruteforce all 2^3 choices
+        # convert back to positive int so we can pop from both heaps in ascending order
         for i in range(len(minElems)):
             minElems[i] *= -1
+            
         heapq.heapify(minElems)
         heapq.heapify(maxElems)
-            
+        
+        # bruteforce all 2^3 choices
         return min(heapq.heappop(maxElems) - heapq.heappop(minElems) for _ in range(4))
