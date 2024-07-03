@@ -1,6 +1,5 @@
 class Trie:
-    def __init__(self, letter = None, isWord = False):
-        self.letter = letter
+    def __init__(self, isWord = False):
         self.isWord = isWord
         self.children = {} # lowercase only (26 chars)
     
@@ -16,7 +15,7 @@ class WordDictionary:
         for c in word:
             # traverse down trie while creating nodes as necessary
             if c not in cur.children:
-                cur.children[c] = Trie(c)
+                cur.children[c] = Trie()
             cur = cur.children[c]
         
         cur.isWord = True # assuming we are not at root
