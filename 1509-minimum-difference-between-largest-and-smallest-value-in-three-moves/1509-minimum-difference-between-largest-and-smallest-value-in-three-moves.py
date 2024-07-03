@@ -2,13 +2,10 @@ import heapq
 
 class Solution:
     def minDifference(self, nums: List[int]) -> int:
-        
-        if len(nums) <= 4:
-            # For n <= 3, set all elems to same val
-            # For n == 4, then the only elem is both the min and the max
-            return 0
-        
         """
+        # For n <= 3, set all elems to same val
+        # For n == 4, then the only elem is both the min and the max
+        
         Since we only need to get largest and smallest 4 values (3 for change, 1 to guarantee a value to compare)
         
         We can sort in O(n + n log 4) = O(n) time
@@ -18,11 +15,11 @@ class Solution:
         Time: O(n)
         Space: O(1) disregarding `nums` input array (to further optimize, pop nums while updating heap)
         """
+        if len(nums) <= 4:
+            return 0
         
-        # minElems = heapq.nsmallest(4, nums)
-        # maxElems = heapq.nlargest(4, nums)
-        minElems = []
-        maxElems = []
+        minElems, maxElems = [], []
+        
         while nums:
             i = nums.pop()
             
@@ -41,7 +38,7 @@ class Solution:
         heapq.heapify(minElems)
         heapq.heapify(maxElems)
         res = float("inf")
-        print(maxElems, minElems)
+
         while maxElems and minElems:
             res = min(res, heapq.heappop(maxElems) - heapq.heappop(minElems))
             
