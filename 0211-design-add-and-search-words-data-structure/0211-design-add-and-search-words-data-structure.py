@@ -20,10 +20,11 @@ class WordDictionary:
             cur = cur.children[c]
         
         cur.isWord = True # assuming we are not at root
-
+    
     def search(self, word: str) -> bool:
         n = len(word)
-
+        
+        @cache
         def searchRec(cur: Optional[Trie], idx: int) -> bool:
             if idx == n:
                 return cur.isWord
