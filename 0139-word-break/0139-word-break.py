@@ -57,13 +57,15 @@ class Solution:
             # what about not cur?
             # if not cur:
                 # return False
-            if i == n:
+            if not cur:
+                return False
+            elif i == n:
                 # reached end of whole string, just need to check whether current path is a valid word
                 return cur.isWord
             
             idx = ord(s[i]) - ASCII_a
             # if current path forms a word, try separating it and forming a new word
             # otherwise, try extending the current path to see if it forms a word
-            return (cur.isWord and DFS(i, root)) or (cur.children[idx] and DFS(i+1, cur.children[idx]))
+            return (cur.isWord and DFS(i, root)) or DFS(i+1, cur.children[idx])
         
         return DFS(0, root)
