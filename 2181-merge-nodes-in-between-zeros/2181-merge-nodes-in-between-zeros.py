@@ -29,8 +29,7 @@ class Solution:
                 prev.next = cur.next
                 mergeNodesRec(prev, cur.next, acc + cur.val)
             
-                
-                
+                      
         
         mergeNodesRec(head, head.next, 0)
         return head
