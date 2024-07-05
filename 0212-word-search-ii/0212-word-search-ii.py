@@ -40,15 +40,6 @@ class Trie():
         
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        """
-        Add both the word itself
-        
-        add reverse of word to dict?
-        
-        Try DFS from every position?
-        
-        Limit word/DFS length to 10
-        """
         trie = Trie()
         
         while words:
