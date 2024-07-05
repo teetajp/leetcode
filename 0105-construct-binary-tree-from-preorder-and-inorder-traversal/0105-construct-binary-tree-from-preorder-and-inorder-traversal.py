@@ -35,14 +35,6 @@ class Solution:
             subtree_root = TreeNode(root_val)
             p_idx += 1
             
-            # if subtree_start == subtree_end - 1:
-                # return subtree_root
-            # else:
-                # subtree has at least one child
-            # root_idx = inorder[subtree_start:subtree_end+1].index(root_val)
-
-            # partition the inorder list and recurse
-            
             subtree_root.left = buildTreeRec(subtree_start, root_idx)
             subtree_root.right = buildTreeRec(root_idx + 1, subtree_end)
             return subtree_root
