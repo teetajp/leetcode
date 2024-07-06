@@ -18,8 +18,6 @@ class Solution:
 
                 if word == endWord:
                     return iterCount
-                # elif word in wordList:
-                    # continue
 
                 # try changing each character in the word
                 for i in range(len(word)):
