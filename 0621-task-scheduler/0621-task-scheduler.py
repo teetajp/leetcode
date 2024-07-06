@@ -5,14 +5,21 @@ class Solution:
         """
         Should always complete the task that has the most freq left.
         """
-        remainingTasks = [(-t_cnt, t_id) for t_id, t_cnt in Counter(tasks).items()] # max heap
+        taskFreq = {}
+        while tasks:
+            task = tasks.pop()
+            if task not in taskFreq:
+                taskFreq[task] = 0
+            taskFreq[task] += 1
+            
+        remainingTasks = [(-t_cnt, t_id) for t_id, t_cnt in taskFreq.items()] # max heap
         coolingTasks = collections.deque() # (task, finishTime, remaining)
         cyclesElapsed = 0 # cycles same as time
         
         heapq.heapify(remainingTasks)
         
         while remainingTasks or coolingTasks:
-            # print(remainingTasks, coolingTasks, cyclesElapsed)            
+          
             if coolingTasks:
                 cooledTaskId, coolEndTime, sameTaskRemaining = coolingTasks.popleft()
                 
