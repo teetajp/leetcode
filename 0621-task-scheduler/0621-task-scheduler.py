@@ -20,17 +20,14 @@ class Solution:
         
         while remainingTasks or coolingTasks:
           
-            if coolingTasks:
+            if coolingTasks and not remainingTasks:
+                # currently idling; fast-forward to when next task is complete
+                cyclesElapsed = coolingTasks[0][1]
+            
+            if coolingTasks and (coolingTasks[0][1] <= cyclesElapsed):
                 cooledTaskId, coolEndTime, sameTaskRemaining = coolingTasks.popleft()
                 
-                if not remainingTasks:
-                    # idle this cycle; can fast forward to when next task is complete
-                    cyclesElapsed = coolEndTime
-                    heapq.heappush(remainingTasks, (-sameTaskRemaining, cooledTaskId) )
-                elif coolEndTime <= cyclesElapsed:
-                    heapq.heappush(remainingTasks, (-sameTaskRemaining, cooledTaskId) )
-                else:
-                    coolingTasks.appendleft((cooledTaskId, coolEndTime, sameTaskRemaining))
+                heapq.heappush(remainingTasks, (-sameTaskRemaining, cooledTaskId) )
             
             
             t_cnt_neg, t_id = heapq.heappop(remainingTasks) # complete a task
@@ -39,8 +36,6 @@ class Solution:
             if -t_cnt_neg > 1:
                 # need to complete more of the same task -> track its cooldown so we can repeat
                 coolingTasks.append( (t_id, cyclesElapsed + n, -t_cnt_neg - 1) )
-                
-            
         
         
         return cyclesElapsed
