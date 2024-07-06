@@ -10,12 +10,12 @@ class Solution:
             Convert wordList to a set -> O(n)
             We visit a maximum of n words since we avoid previously visited words. -> O(n)
             
-            For each word, we try to transition to another word by changing each position to each of the 26 letters of the alphabet and checking if it forms a word in the wordList.
-            -> O(n * m * 26) = O(nm)
+            For each word, we try to transition to another word by changing each position to each of the 26 letters of the alphabet and checking if it forms a word in the wordList. Forming the full word and checking it takes O(m), we do that for each position so it takes O(m^2)
+            -> O(n * m^2 * 26) = O(n * m^2)
             
             Even though we could try to transition to each word in the wordList from current word, because we remove visited words from the `wordList`, in total, we only visit O(n) words.
             
-            So total time complexity is O(nm), and space complexity is O(n)
+            So total time complexity is O(n * m^2), and space complexity is O(n)
         """
         wordList = set(wordList) # use it as a list of unexplored words
         queue = collections.deque([beginWord])
