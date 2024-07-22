@@ -4,7 +4,7 @@ class Solution:
         
         def removeDiagonals(row, col) -> set[tuple[int, int]]:
             if row < 0 or row >= n or col < 0 or col >= n:
-                return frozenset()
+                return set()
             
             removed = set()
             offset_diag, offset_antidiag = col, col
@@ -32,7 +32,9 @@ class Solution:
             for col in range(n):
                 if colsOpen[col] and (row, col) not in diagsBlocked:
                     # update params for new iter
-                    newDiagsBlocked = diagsBlocked.union(removeDiagonals(row, col)) # immutable set
+                    # diagsBlocked.union(removeDiagonals(row, col)) # immutable set
+                    diagsAttackedByCur = removeDiagonals(row, col)
+                    newDiagsBlocked = diagsBlocked.union(diagsAttackedByCur)   # new set
                     colsOpen[col] = False
                     board[row][col] = 'Q'
                     # recurse
@@ -41,5 +43,5 @@ class Solution:
                     board[row][col] = '.'
                     colsOpen[col] = True
                     
-        solveRec(0, frozenset())
+        solveRec(0, set())
         return res
