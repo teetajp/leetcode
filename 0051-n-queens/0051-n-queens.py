@@ -1,4 +1,3 @@
-from copy import deepcopy
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         
@@ -32,13 +31,15 @@ class Solution:
             for col in range(n):
                 if colsOpen[col] and (row, col) not in diagsBlocked:
                     # update params for new iter
-                    # diagsBlocked.union(removeDiagonals(row, col)) # immutable set
                     diagsAttackedByCur = removeDiagonals(row, col)
                     newDiagsBlocked = diagsBlocked.union(diagsAttackedByCur)   # new set
+                    
                     colsOpen[col] = False
                     board[row][col] = 'Q'
+                    
                     # recurse
                     solveRec(row+1, newDiagsBlocked)
+                    
                     # backtrack
                     board[row][col] = '.'
                     colsOpen[col] = True
