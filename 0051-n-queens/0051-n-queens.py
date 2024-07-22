@@ -21,7 +21,7 @@ class Solution:
                     removed.add( (r, offset_antidiag) )
                     offset_antidiag -= 1
                 
-            return frozenset(removed)
+            return removed
         
         res = []
         colsOpen = [True for _ in range(n)]
