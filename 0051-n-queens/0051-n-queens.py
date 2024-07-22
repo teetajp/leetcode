@@ -7,7 +7,6 @@ class Solution:
                 return frozenset()
             
             removed = set()
-            
             offset_diag, offset_antidiag = col, col
             for r in range(row, n):
                 # remove diagonals (top left to bottom right)
@@ -33,10 +32,11 @@ class Solution:
             for col in range(n):
                 if colsOpen[col] and (row, col) not in diagsBlocked:
                     # update params for new iter
+                    newDiagsBlocked = diagsBlocked.union(removeDiagonals(row, col)) # immutable set
                     colsOpen[col] = False
                     board[row][col] = 'Q'
                     # recurse
-                    solveRec(row+1, diagsBlocked.union(removeDiagonals(row, col)))
+                    solveRec(row+1, newDiagsBlocked)
                     # backtrack
                     board[row][col] = '.'
                     colsOpen[col] = True
