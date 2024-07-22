@@ -9,16 +9,16 @@ class Solution:
                 return frozenset()
             
             removed = set()
-            offset_diag, offset_antidiag = col - 1, col + 1
-            for r in range(row - 1, -1, -1):
-                # remove diagonals (top left to bottom right)
-                if offset_diag >= 0:
-                    removed.add( (r, offset_diag) )
-                    offset_diag -= 1
-                # remove anti-diagonals (top right to bottom left)
-                if offset_antidiag < n:
-                    removed.add( (r, offset_antidiag) )
-                    offset_antidiag += 1
+            # offset_diag, offset_antidiag = col - 1, col + 1
+            # for r in range(row - 1, -1, -1):
+            #     # remove diagonals (top left to bottom right)
+            #     if offset_diag >= 0:
+            #         removed.add( (r, offset_diag) )
+            #         offset_diag -= 1
+            #     # remove anti-diagonals (top right to bottom left)
+            #     if offset_antidiag < n:
+            #         removed.add( (r, offset_antidiag) )
+            #         offset_antidiag += 1
             
             offset_diag, offset_antidiag = col, col
             for r in range(row, n):
