@@ -3,8 +3,6 @@ class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         
         def removeDiagonals(row, col) -> set[tuple[int, int]]:
-            # queens placed in earlier rows will already have removed available squares
-            # so this function cannot possibly invalidate a previously placed queen
             if row < 0 or row >= n or col < 0 or col >= n:
                 return frozenset()
             
@@ -34,13 +32,11 @@ class Solution:
             
             for col in range(n):
                 if colsOpen[col] and (row, col) not in diagsBlocked:
-                    
                     # update params for new iter
-                    newDiagsBlocked = diagsBlocked.union(removeDiagonals(row, col)) # immutable set
                     colsOpen[col] = False
                     board[row][col] = 'Q'
                     # recurse
-                    solveRec(row+1, newDiagsBlocked)
+                    solveRec(row+1, diagsBlocked.union(removeDiagonals(row, col)))
                     # backtrack
                     board[row][col] = '.'
                     colsOpen[col] = True
