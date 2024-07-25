@@ -30,7 +30,7 @@ class Solution:
             tmp = i, minProd * i, maxProd *i
             maxProd, minProd = max(tmp), min(tmp)
                 
-            res = max(res, maxProd, minProd)
+            res = max(res, maxProd)
             
             
         return res
