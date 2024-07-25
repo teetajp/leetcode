@@ -27,7 +27,8 @@ class Solution:
                 maxProd = minProd = 1
                 continue
 
-            maxProd, minProd = max(minProd * i, i, i * maxProd), min(minProd * i, i, i * maxProd)
+            tmp = i, minProd * i, maxProd *i
+            maxProd, minProd = max(tmp), min(tmp)
                 
             res = max(res, maxProd, minProd)
             
