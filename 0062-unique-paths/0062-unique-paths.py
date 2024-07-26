@@ -5,7 +5,10 @@ class Solution:
         dp[i][0] = 1
         dp[i][j] = dp[i-1][j] + dp[i][j-1]
         
-        to further optimize, get the min of (m, n)
+        To save space, iterate col-by-col or row-by-row depending on which dim is smaller.
+        
+        Time: O(m, n)
+        Space: O(min(m, n))
         """
         minDim, maxDim = min(m, n), max(m, n)
         dp = [1] * minDim
