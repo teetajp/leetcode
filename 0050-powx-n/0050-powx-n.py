@@ -1,4 +1,5 @@
 class Solution:
+    @functools.cache
     def myPow(self, x: float, n: int) -> float:
         """
         -100.0 < x < 100.0
@@ -12,6 +13,6 @@ class Solution:
         
         if n % 2 == 1:
             # odd
-            return x * self.myPow(x * x, n // 2)
+            return x * self.myPow(x, n // 2) * self.myPow(x, n // 2)
         else:
-            return self.myPow(x * x, n // 2)
+            return self.myPow(x, n // 2) * self.myPow(x, n // 2)
