@@ -3,28 +3,8 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         
-        
-        [(0, 0), (0, 1), (0, 2), (0, 3)] ==> [(3, 0), (2, 0), (1, 0), (0, 0)]
-        [(1, 0), (1, 1), (1, 2), (1, 3)] ==> [(3, 1), (2, 1), (1, 1), (0, 1)]
-        [(2, 0), (2, 1), (2, 2), (2, 3)] ==> [(3, 2), (2, 2), (1, 2), (0, 2)]
-        [(3, 0), (3, 1), (3, 2), (3, 3)] ==> [(3, 3), (2, 3), (1, 3), (0, 3)]
-        
-        keep kicking elements out of its position
-        
-        only need to move up until middle row and col
-        
-        (0, 0) -> (0, n) = (0, 3)
-        (0, 3) -> (n, n) = (3, 3)
-        (3, 3) -> (n, 0) = (3, 0)
-        (3, 0) -> (0, 0) = (0, 0)
-        
-        (i, j) -> (j, n-i)
-        (0, 1) -> (1, n) = (1, 3)
-        (1, 3) -> (n, 2) = (3, 2)
-        (3, 1)
-        
-        (1, 1) -> (1, 2) = (j, n - 1)
-        (1, 2) -> (2, 2) = (j, n - i)
+        - keep kicking elements out of its position until we end up back at the starting position
+            - similar to "cuckoo hashing"
         """
         n = len(matrix)
         
