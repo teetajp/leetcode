@@ -9,20 +9,10 @@ class Solution:
         
         to further optimize, get the min of (m, n)
         """
-        if n <= m:
-            dp = [1] * n
+        dp = [1] * min(m, n)
 
-            for _ in range(1, m):
-                for j in range(1, n):
-                    dp[j] = dp[j-1] + dp[j] # left + up
+        for _ in range(1, max(m, n)):
+            for i in range(1, min(m, n)):
+                dp[i] = dp[i-1] + dp[i] # left + up
                     
-            return dp[n-1]
-        else:
-            dp = [1] * m
-            
-            for _ in range(1, n):
-                for i in range(1, m):
-                    dp[i] = dp[i-1] + dp[i] # left + up
-            
-                
-            return dp[m-1]
+        return dp[min(m, n)-1]
