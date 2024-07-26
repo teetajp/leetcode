@@ -1,6 +1,3 @@
-import sys
- 
-sys.setrecursionlimit(10**6)
 class Solution:
     def myPow(self, x: float, n: int) -> float:
         """
