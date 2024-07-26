@@ -1,8 +1,6 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         """
-        
-        
         dp[0][j] = 1
         dp[i][0] = 1
         dp[i][j] = dp[i-1][j] + dp[i][j-1]
@@ -14,6 +12,6 @@ class Solution:
 
         for _ in range(1, maxDim):
             for i in range(1, minDim):
-                dp[i] = dp[i-1] + dp[i] # left + up
+                dp[i] += dp[i-1] # left + up
                     
         return dp[minDim-1]
