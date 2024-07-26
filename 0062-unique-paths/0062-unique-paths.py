@@ -9,7 +9,7 @@ class Solution:
         
         to further optimize, get the min of (m, n)
         """
-        if n < m:
+        if n <= m:
             dp = [1] * n
 
             for _ in range(1, m):
