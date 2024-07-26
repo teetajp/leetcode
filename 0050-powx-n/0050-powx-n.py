@@ -11,4 +11,4 @@ class Solution:
         elif n < 0:
             return 1 / self.myPow(x, -n)
         
-        return (((n) % 2)* (x-1) + 1)* self.myPow(x, n // 2) * self.myPow(x, n // 2)
+        return (x if n % 2 == 1 else 1) * self.myPow(x, n // 2) * self.myPow(x, n // 2)
