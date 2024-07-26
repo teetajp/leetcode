@@ -9,10 +9,11 @@ class Solution:
         
         to further optimize, get the min of (m, n)
         """
-        dp = [1] * min(m, n)
+        minDim, maxDim = min(m, n), max(m, n)
+        dp = [1] * minDim
 
-        for _ in range(1, max(m, n)):
-            for i in range(1, min(m, n)):
+        for _ in range(1, maxDim):
+            for i in range(1, minDim):
                 dp[i] = dp[i-1] + dp[i] # left + up
                     
-        return dp[min(m, n)-1]
+        return dp[minDim-1]
