@@ -1,3 +1,4 @@
+from sortedcontainers import SortedList
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         """
@@ -61,11 +62,23 @@ class Solution:
         """
         res: int = 1
         n: int = len(nums)
-        maxLIS: list[int] = [1] * n # initialize DP array; lower bound of all answer is 1 (subseq with just the element)
+        maxLIS: SortedList[int] = SortedList([(nums[0], 1)])
+        # maxLIS: list[int] = [1] * n # initialize DP array; lower bound of all answer is 1 (subseq with just the element)
         
-        for i in range(1, n):    
-            maxLIS[i]: int = 1 + max((maxLIS[j] for j in reversed(range(0, i)) if nums[j] < nums[i]), default=0)
-            res: int = maxLIS[i] if maxLIS[i] > res else res
+        for val in nums[1:]: 
+            # maxLIS[i]: int = 1 + max((maxLIS[j] for j in reversed(range(0, i)) if nums[j] < nums[i]), default=0)
+            prevMaxLIS = 0
+            foundPrevMax = False
+            pivot = maxLIS.bisect_left( (val, n) ) # end idx where all elems < nums[i]
+            for i in reversed(range(0, min(len(maxLIS),pivot+1))):
+                # if maxLIS[i] < val
+                if maxLIS[i][0] < val and maxLIS[i][1] > prevMaxLIS:
+                    prevMaxLIS = maxLIS[i][1]
+                    foundPrevMax = True
+            
+            curMaxLIS = prevMaxLIS + 1 if foundPrevMax else 1
+            maxLIS.add( (val, curMaxLIS) )
+            res: int = curMaxLIS if curMaxLIS > res else res
         
         
         return res
