@@ -12,7 +12,6 @@ class Solution:
         - space: O(n)
         
         Dynamic Programming:
-        - knapsack? triangular matrix?
         - Candidates:
             - Let maxLIS[i] be the length of the longest strictly increasing subsequence in `nums` from idx 0 to idx i, where nums[i] is included in the subsequence.
                 - Need to keep some kind of monotonic stack / queue ? heap?
@@ -39,14 +38,14 @@ class Solution:
         Let's implement the O(n^2) algorithm first, then implement the O(n log n) algorithm later
         
         ```
-        Assume len(nums) > 0.
-        Let maxLIS[i] be the length of the longest strictly increasing subsequence in `nums` from idx 0 to idx i.
+        Assume n = len(nums) > 0.
+        Let maxLIS[i] be the length of the longest strictly increasing subsequence in `nums` from idx 0 to idx i, where nums[i] is included in the sequence.
         
         Base Case:
             maxLIS[0] = 1
         Recursive Case:
             For 0 < i < n,
-                maxLIS[i] = max( maxLIS[i-1], 1 + max(maxLIS[j] where nums[j] < nums[i] and 0 <= j < i) )
+                maxLIS[i] = max( 1 + max(maxLIS[j] where nums[j] < nums[i] and 0 <= j < i) )
             
         Order of Evaluation:
             Evaluate `maxLIS[i]`
@@ -60,10 +59,9 @@ class Solution:
         Space Complexity: O(n) for `maxLIS` array
         ```
         """
-        n: int = len(nums)
-        maxLIS: list[int] = [1] * n # initialize DP array; lower bound of all answer is 1 (subseq with just the element)
+        maxLIS: list[int] = [1] * len(nums) # initialize DP array; lower bound of all answer is 1 (subseq with just the element)
         res = 1
-        for i in range(1, n):
+        for i in range(1, len(nums)):
             
             # length of maxLIS before iteration i, where sequence was lower in value
             maxLIS[i] = 1 + max((maxLIS[j] for j in reversed(range(0, i)) if nums[j] < nums[i]), default=0)
