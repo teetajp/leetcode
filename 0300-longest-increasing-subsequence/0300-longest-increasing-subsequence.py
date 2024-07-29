@@ -68,7 +68,6 @@ class Solution:
             maxLIS[i] = 1 + max((maxLIS[j] for j in reversed(range(0, i)) if nums[j] < nums[i]), default=0)
             if maxLIS[i] > res:
                 res = maxLIS[i]
-            # res = max(res, maxLIS[i])
         
         
         return res
