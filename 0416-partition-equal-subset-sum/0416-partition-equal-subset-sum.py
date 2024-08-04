@@ -42,19 +42,17 @@ class Solution:
         Runtime: O(n)???
         Space: O(n * range(nums))???
         """
-        target, halfTotalSumRem = divmod(sum(nums), 2)
+        target, rem = divmod(sum(nums), 2)
 
-        if halfTotalSumRem != 0 or (len(nums) == 1 and nums[0] != 0):
+        if rem != 0 or (len(nums) == 1 and nums[0] != 0):
             return False
         elif target == 0:
             return True
         
-        n = len(nums)
-        
         # base case
-        validSums = set([0, nums[n-1]])
+        validSums = set([0, nums[-1]])
         
-        for i in range(n-2, -1, -1):
+        for i in range(len(nums)-2, -1, -1):
             newSums = set()
             
             for j in validSums:
