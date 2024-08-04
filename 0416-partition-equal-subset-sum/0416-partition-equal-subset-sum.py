@@ -50,25 +50,22 @@ class Solution:
             return True
         
         n = len(nums)
-        dp = defaultdict(bool)
         
         # base case
-        prev_targets = set([0, nums[n-1]])
+        validSums = set([0, nums[n-1]])
         
         for i in range(n-2, -1, -1):
-            new_targets = set()
+            newSums = set()
             
-            for j in prev_targets:
-                dp[j] = True
-                dp[nums[i] + j] = True
-                new_targets.add(nums[i] + j)
+            for j in validSums:
+                newSums.add(nums[i] + j)
                 
-            dp[nums[i]] = True
-            new_targets.add(nums[i])
+            newSums.add(nums[i])
             
-            prev_targets.update(new_targets)
+            validSums.update(newSums)
             
-            if dp[target]:
+            if target in validSums:
+                # found answer, return early
                 return True
         
-        return dp[target]
+        return False # never found a valid answer
