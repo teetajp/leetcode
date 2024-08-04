@@ -50,28 +50,25 @@ class Solution:
             return True
         
         n = len(nums)
-        dp = [defaultdict(bool) for _ in range(n)]
+        dp = defaultdict(bool)
         
         # base case
-        dp[n-1][0] = dp[n-1][nums[n-1]] = True
         prev_targets = set([0, nums[n-1]])
         
         for i in range(n-2, -1, -1):
             new_targets = set()
             
             for j in prev_targets:
-                dp[i][j] = True
-                dp[i][nums[i] + j] = True
+                dp[j] = True
+                dp[nums[i] + j] = True
                 new_targets.add(nums[i] + j)
                 
-            dp[i][nums[i]] = True
+            dp[nums[i]] = True
             new_targets.add(nums[i])
             
             prev_targets.update(new_targets)
             
-            if dp[i][target]:
+            if dp[target]:
                 return True
-            
         
-        
-        return dp[0][target]
+        return dp[target]
