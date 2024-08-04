@@ -50,15 +50,15 @@ class Solution:
             return True
         
         # base case
-        validSums = set([0, nums[-1]])
+        validSums = set([0])
         
-        for i in range(len(nums)-2, -1, -1):
+        for i in nums[::-1]:
             newSums = set()
             
             for j in validSums:
-                newSums.add(nums[i] + j)
+                newSums.add(i + j)
                 
-            newSums.add(nums[i])
+            newSums.add(i)
             validSums.update(newSums)
             
             if target in validSums:
