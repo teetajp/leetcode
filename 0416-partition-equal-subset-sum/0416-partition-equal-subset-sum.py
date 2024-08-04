@@ -6,7 +6,6 @@ class Solution:
         Sum must be even number, since we are using integers.
         Even if we sum is even, we may not be able to partition if we elements unevenly weighted, such as if there is only one element and it is even.
         
-        
         Each element can belong to one of two groups.
         
         Consider nums be to be sorted.
@@ -15,7 +14,7 @@ class Solution:
         
         We want the sum of each partition to be equal, or equivalently, the sum of one of the partition to be sum(nums) / 2, since the other partition must be equal since we checked for the odd case earlier.
         
-        new problem statement: can we choose a subset of nums such that the sum of that subset == sum(nums) // 2?
+        Rephrased problem statement: can we choose a subset of nums such that the sum of that subset == sum(nums) // 2?
         
         Can check if at a given index with a certain sum, if has already been checked, then we know we cant partition it, and return early.
         
@@ -33,14 +32,11 @@ class Solution:
             
         Final Answer:
             DP[0][sum(nums) / 2]
-        
-        Evaluation Order:
-            iterate from i := n-1 -> 0
-                target_{i} := { target_{i+1} - nums[i+1], target_{i+1}   }
-                OR target_{i} = argmax(dp[i+1]) ??
                 
-        Runtime: O(n)???
-        Space: O(n * range(nums))???
+         Use a set to dynamically track the possible sums we can achieve.
+                
+        Runtime: O(n * target)
+        Space: O(target)???
         """
         target, rem = divmod(sum(nums), 2)
 
