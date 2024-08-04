@@ -38,21 +38,30 @@ class Solution:
         Runtime: O(n * target)
         Space: O(target)???
         """
-        total_sum = sum(nums)
-        
-        # If the total sum is odd, we cannot partition it into two equal subsets
-        if total_sum % 2 != 0:
+        target, rem = divmod(sum(nums), 2)
+
+        if rem != 0 or (len(nums) == 1 and nums[0] != 0):
             return False
+        elif target == 0:
+            return True
         
-        target = total_sum // 2
+        # base case
+        validSums = set([0])
         
-        # Create a DP array with target + 1 length
-        dp = [False] * (target + 1)
-        dp[0] = True  # We can always achieve a sum of 0 by taking no elements
+        for i in nums[::-1]:
+            newSums = set()
+            
+            for j in validSums:
+                k = i + j
+                
+                if k <= target:
+                    newSums.add(i + j)
+                
+            newSums.add(i)
+            validSums.update(newSums)
+            
+            if target in validSums:
+                # found answer, return early
+                return True
         
-        for num in nums:
-            # Traverse the dp array backwards to avoid overwriting results we need to use in this iteration
-            for j in range(target, num - 1, -1):
-                dp[j] = dp[j] or dp[j - num]
-        
-        return dp[target]
+        return False # never found a valid answer
