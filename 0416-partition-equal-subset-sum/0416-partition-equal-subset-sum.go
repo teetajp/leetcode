@@ -1,8 +1,8 @@
 func canPartition(nums []int) bool {
     sum := 0
     
-    for i := range nums {
-        sum += nums[i]
+    for _, val := range nums {
+        sum += val
     }
     
     target := sum / 2
