@@ -61,7 +61,6 @@ class Solution:
                 newSums.add(nums[i] + j)
                 
             newSums.add(nums[i])
-            
             validSums.update(newSums)
             
             if target in validSums:
