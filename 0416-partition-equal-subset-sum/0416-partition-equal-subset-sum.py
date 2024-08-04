@@ -54,13 +54,22 @@ class Solution:
         
         # base case
         dp[n-1][0] = dp[n-1][nums[n-1]] = True
+        prev_targets = set([0, nums[n-1]])
         
         for i in range(n-2, -1, -1):
-            for j in range(0, target+1):
-                dp[i][j] = dp[i+1][j] or dp[i+1][j - nums[i]]
+            new_targets = set()
+            
+            for j in prev_targets:
+                dp[i][j] = True
+                dp[i][nums[i] + j] = True
+                new_targets.add(nums[i] + j)
                 
             dp[i][nums[i]] = True
+            new_targets.add(nums[i])
+            
+            prev_targets.update(new_targets)
         
+            
         
         
         return dp[0][target]
