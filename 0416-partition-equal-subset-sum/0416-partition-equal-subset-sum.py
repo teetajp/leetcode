@@ -52,7 +52,10 @@ class Solution:
             newSums = set()
             
             for j in validSums:
-                newSums.add(i + j)
+                k = i + j
+                
+                if k <= target:
+                    newSums.add(i + j)
                 
             newSums.add(i)
             validSums.update(newSums)
