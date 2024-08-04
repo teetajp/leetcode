@@ -68,7 +68,9 @@ class Solution:
             new_targets.add(nums[i])
             
             prev_targets.update(new_targets)
-        
+            
+            if dp[i][target]:
+                return True
             
         
         
