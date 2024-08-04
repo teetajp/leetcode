@@ -54,7 +54,6 @@ class Solution:
         
         # base case
         dp[n-1][0] = dp[n-1][nums[n-1]] = True
-        prev_targets = set([nums[n-1], 0])
         
         for i in range(n-2, -1, -1):
             for j in range(0, target+1):
