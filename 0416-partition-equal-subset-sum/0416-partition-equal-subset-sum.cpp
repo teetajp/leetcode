@@ -3,7 +3,6 @@ public:
     bool canPartition(vector<int>& nums) {
         int sum = 0;
         
-        
         for (int num : nums) {
             sum += num;
         }
